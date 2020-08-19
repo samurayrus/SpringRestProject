@@ -8,14 +8,13 @@ import ru.innotechnum.controllers.entity.Publication;
 import ru.innotechnum.controllers.entity.User;
 import org.springframework.stereotype.Repository;
 
+import java.util.List;
+
 @Repository
 @Transactional
 public class Dao {
     @PersistenceContext
     private EntityManager entityManager;
-    //entityManager.persist(country);
-    //entityManager.find(Country.class, id);
-    //entityManager.remove(country);
 
     public String createUser(User user) {
         entityManager.persist(user);
@@ -51,8 +50,6 @@ public class Dao {
     }
 
     public String getUserRaiting(int id) {
-        //return entityManager.createQuery("from Country c order by c.id desc", Country.class).getResultList();
-        //return entityManager.createQuery("from publication_table p order by p.author_id=3", Publication.class).getResultList();
         var publ = entityManager.createQuery("Select SUM(raiting) from Publication where author_id=" + id).getResultList().get(0);
         return publ.toString();
     }
@@ -63,5 +60,8 @@ public class Dao {
         return publication.getAuthorName();
     }
 
+    public List<Publication> getAllPublication() {
+        return entityManager.createQuery("from Publication p order by p.id desc", Publication.class).getResultList();
+    }
 
 }

@@ -21,7 +21,7 @@ public class Publication {
 
     public Publication(String name, String text, int authorId) {
         raiting = 0;
-        this.name=name;
+        this.name = name;
         this.text = text;
         this.authorId = authorId;
         dateCreate = LocalDate.now();
@@ -31,36 +31,8 @@ public class Publication {
         this.id = id;
     }
 
-    public int getId() {
-        return id;
-    }
-
-    public String getName() {
-        return name;
-    }
-
     public void setName(String name) {
         this.name = name;
-    }
-
-    public int getAuthorId() {
-        return authorId;
-    }
-
-    public int getRaiting() {
-        return raiting;
-    }
-
-    public LocalDate getDateCreate() {
-        return dateCreate;
-    }
-
-    public String getAuthorName() {
-        return authorName;
-    }
-
-    public String getText() {
-        return text;
     }
 
     public void setAuthorId(int authorId) {
@@ -83,8 +55,37 @@ public class Publication {
         this.text = text;
     }
 
+    public int getId() {
+        return id;
+    }
+
+    public String getName() {
+        return name;
+    }
+
+    public String getText() {
+        return text;
+    }
+
+    public int getRaiting() {
+        return raiting;
+    }
+
+    public int getAuthorId() {
+        return authorId;
+    }
+
+    public String getAuthorName() {
+        return authorName;
+    }
+
+    public LocalDate getDateCreate() {
+        return dateCreate;
+    }
+
     @Override
     public String toString() {
-        return getName() + getText() + getAuthorName() + getAuthorId() + getDateCreate();
+        return "{\n id  =" + getId() + ", Name = " + getName() + ", Text = " + getText() + ", DateCreate = " + getDateCreate() + ", AuthorId = " + getAuthorId() +
+                ", AuthorName = " + getAuthorName() + "}";
     }
 }

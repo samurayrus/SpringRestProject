@@ -14,3 +14,12 @@ springrestproject/.idea/encodings.xml
 springrestproject/.idea/misc.xml
 springrestproject/.idea/uiDesigner.xml
 springrestproject/.idea/workspace.xml
+springrestproject/target/classes/ru/innotechnum/controllers/BaseResponse.class
+springrestproject/target/classes/ru/innotechnum/controllers/Application.class
+springrestproject/target/classes/ru/innotechnum/controllers/controller/ControllerPublication.class
+springrestproject/target/classes/ru/innotechnum/controllers/controller/ControllerUser.class
+springrestproject/target/classes/ru/innotechnum/controllers/database/Dao.class
+springrestproject/target/classes/ru/innotechnum/controllers/entity/User.class
+springrestproject/target/classes/ru/innotechnum/controllers/entity/Publication.class
+springrestproject/target/classes/ru/innotechnum/controllers/PaymentRequest.class
+springrestproject/.idea/vcs.xml

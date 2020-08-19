@@ -17,8 +17,8 @@ public class User {
     public User() {}
 
     public User(String nickName, String aboutMe) {
-        this.nickName=nickName;
-        this.aboutMe=aboutMe;
+        this.nickName = nickName;
+        this.aboutMe = aboutMe;
         dateReg = LocalDate.now();
     }
 
@@ -39,7 +39,7 @@ public class User {
     }
 
     public int getId() {
-        return id=0;
+        return id = 0;
     }
 
     public String getAboutMe() {
@@ -56,6 +56,6 @@ public class User {
 
     @Override
     public String toString() {
-        return getNickName()+getAboutMe()+getDateReg()+getId();
+        return "\n{ NickName =" + getNickName() + ", AboutMe = " + getAboutMe() + ", DateReg = " + getDateReg() + ", id = " + getId() + "}";
     }
 }

@@ -21,7 +21,7 @@ public class ControllerPublication {
 
     @PutMapping("/{id}/{name}/{about}")
     public String editPublication(@PathVariable int id, @PathVariable String name, @PathVariable String about) {
-        return dao.editPublication( id, name,about);
+        return dao.editPublication(id, name, about);
     }
 
     @DeleteMapping("/{id}")
@@ -32,5 +32,10 @@ public class ControllerPublication {
     @PostMapping("/{id}")
     public String addPublicationRaiting(@PathVariable int id) {
         return dao.addRaiting(id);
+    }
+
+    @GetMapping("/")
+    public String getAllPublication() {
+        return "{" + dao.getAllPublication().toString() + "}";
     }
 }
