@@ -9,7 +9,7 @@ import org.springframework.http.MediaType;
 import org.springframework.web.bind.annotation.*;
 
 @RestController
-@RequestMapping(value = "/user", produces = MediaType.APPLICATION_JSON_VALUE)
+@RequestMapping(value = "/user", produces = MediaType.APPLICATION_JSON_VALUE) //Для /test
 public class ControllerUser {
     @Autowired
     private Dao dao;
@@ -21,7 +21,7 @@ public class ControllerUser {
         return dao.createUser(user);
     }
 
-    @PostMapping("/test")
+    @PostMapping("/test") //Не работает!
     @ResponseStatus(HttpStatus.CREATED)
     public String test(@RequestBody BaseResponse request) {
         return request.getStatus() + request.getCode();

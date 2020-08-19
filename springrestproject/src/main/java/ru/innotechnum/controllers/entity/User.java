@@ -2,6 +2,7 @@ package ru.innotechnum.controllers.entity;
 
 import javax.persistence.*;
 import java.time.LocalDate;
+import java.util.List;
 
 @Entity
 @Table(name = "UserTable")
@@ -13,6 +14,9 @@ public class User {
     private String nickName;
     private String aboutMe;
     private LocalDate dateReg;
+
+    ///@OneToMany(mappedBy = "user", cascade = CascadeType.ALL, orphanRemoval = true)
+    //private List<Publication> list;
 
     public User() {}
 
