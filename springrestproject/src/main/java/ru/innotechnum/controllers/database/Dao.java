@@ -22,9 +22,12 @@ public class Dao {
         return "OK";
     }
 
-    public String createComment(Comment user) {
-        entityManager.persist(user);
-        return "OK";
+    public String createComment(Comment comm) {
+        comm.setUser(findUser(comm.getAuthorId()));
+        comm.setAuthName(comm.getUser().getNickName());
+        entityManager.persist(comm);
+        //entityManager.remove(findUser(comm.getAuthorId()));
+        return findUser(comm.getAuthorId()).toString();
     }
 
     public User findUser(int id) {
@@ -34,7 +37,7 @@ public class Dao {
 
     public String addRaiting(int id) {
         Publication publication = entityManager.find(Publication.class, id);
-        publication.setRaiting(publication.getRaiting()+1);
+        publication.setRaiting(publication.getRaiting() + 1);
         entityManager.merge(publication);
         return "+1";
     }

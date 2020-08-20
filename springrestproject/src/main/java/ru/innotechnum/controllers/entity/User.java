@@ -15,8 +15,16 @@ public class User {
     private String aboutMe;
     private LocalDate dateReg;
 
-    ///@OneToMany(mappedBy = "user", cascade = CascadeType.ALL, orphanRemoval = true)
-    //private List<Publication> list;
+    @OneToMany(mappedBy = "user", cascade = CascadeType.ALL, orphanRemoval = true)
+    private List<Comment> listCom;
+
+    public List<Comment> getListCom() {
+        return listCom;
+    }
+
+    public void setListCom(List<Comment> listCom) {
+        this.listCom = listCom;
+    }
 
     public User() {}
 
@@ -60,6 +68,12 @@ public class User {
 
     @Override
     public String toString() {
-        return "\n{ NickName =" + getNickName() + ", AboutMe = " + getAboutMe() + ", DateReg = " + getDateReg() + ", id = " + getId() + "}";
+        return "User{" +
+                "id=" + id +
+                ", nickName='" + nickName + '\'' +
+                ", aboutMe='" + aboutMe + '\'' +
+                ", dateReg=" + dateReg +
+                ", listCom=" + listCom +
+                '}';
     }
 }

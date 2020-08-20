@@ -2,6 +2,7 @@ package ru.innotechnum.controllers.entity;
 
 import javax.persistence.*;
 import java.time.LocalDate;
+import java.util.List;
 
 @Entity
 @Table(name="COMMENTS")
@@ -25,7 +26,19 @@ public class Comment {
     @Column(name = "parentid")
     private int parentId;
 
+    @ManyToOne(cascade = CascadeType.ALL)
+    @JoinColumn(name = "user_id")
+    private User user;
+
     public Comment() {}
+
+    public User getUser() {
+        return user;
+    }
+
+    public void setUser(User user) {
+        this.user = user;
+    }
 
     public int getId() {
         return id;
