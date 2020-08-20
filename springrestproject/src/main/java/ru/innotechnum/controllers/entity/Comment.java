@@ -2,7 +2,6 @@ package ru.innotechnum.controllers.entity;
 
 import javax.persistence.*;
 import java.time.LocalDate;
-import java.util.List;
 
 @Entity
 @Table(name="COMMENTS")
@@ -19,10 +18,11 @@ public class Comment {
     private int authorId;
     @Column(name = "authname")
     private String authName;
+
     @Column(name = "publicationid")
     private int publicationId;
     @Column(name = "datecreate")
-    private LocalDate DateCreate;
+    private LocalDate dateCreate;
     @Column(name = "parentid")
     private int parentId;
 
@@ -31,6 +31,24 @@ public class Comment {
     private User user;
 
     public Comment() {}
+
+    public Comment(String text, int authorId, int publicationId, int parentId) {
+        this.text = text;
+        this.authorId = authorId;
+        this.publicationId = publicationId;
+        this.parentId = parentId;
+        dateCreate = LocalDate.now();
+        raiting=0;
+    }
+
+    public int getPublicationId() {
+        return publicationId;
+    }
+
+    public void setPublicationId(int publicationId) {
+        this.publicationId = publicationId;
+    }
+
 
     public User getUser() {
         return user;
@@ -60,12 +78,9 @@ public class Comment {
         return authName;
     }
 
-    public int getPublicationId() {
-        return publicationId;
-    }
 
     public LocalDate getDateCreate() {
-        return DateCreate;
+        return dateCreate;
     }
 
     public int getParentId() {
@@ -92,12 +107,9 @@ public class Comment {
         this.authName = authName;
     }
 
-    public void setPublicationId(int publicationId) {
-        this.publicationId = publicationId;
-    }
 
     public void setDateCreate(LocalDate dateCreate) {
-        DateCreate = dateCreate;
+        this.dateCreate = dateCreate;
     }
 
     public void setParentId(int parentId) {
@@ -112,8 +124,7 @@ public class Comment {
                 ", raiting=" + raiting +
                 ", authorId=" + authorId +
                 ", authName='" + authName + '\'' +
-                ", publicationId=" + publicationId +
-                ", DateCreate=" + DateCreate +
+                ", DateCreate=" + dateCreate +
                 ", parentId=" + parentId +
                 '}';
     }

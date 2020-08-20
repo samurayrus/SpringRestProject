@@ -26,9 +26,9 @@ public class Dao {
         comm.setUser(findUser(comm.getAuthorId()));
         comm.setAuthName(comm.getUser().getNickName());
         entityManager.persist(comm);
-        //entityManager.remove(findUser(comm.getAuthorId()));
         return findUser(comm.getAuthorId()).toString();
     }
+
 
     public User findUser(int id) {
         User user = entityManager.find(User.class, id);

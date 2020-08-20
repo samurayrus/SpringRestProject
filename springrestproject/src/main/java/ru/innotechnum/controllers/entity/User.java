@@ -1,11 +1,13 @@
 package ru.innotechnum.controllers.entity;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
+
 import javax.persistence.*;
 import java.time.LocalDate;
 import java.util.List;
 
 @Entity
-@Table(name = "USER_TABLE")
+@Table(name = "USERS")
 public class User {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -73,7 +75,6 @@ public class User {
                 ", nickName='" + nickName + '\'' +
                 ", aboutMe='" + aboutMe + '\'' +
                 ", dateReg=" + dateReg +
-                ", listCom=" + listCom +
                 '}';
     }
 }

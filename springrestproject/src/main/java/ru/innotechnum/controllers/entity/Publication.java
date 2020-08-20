@@ -2,9 +2,10 @@ package ru.innotechnum.controllers.entity;
 
 import javax.persistence.*;
 import java.time.LocalDate;
+import java.util.List;
 
 @Entity
-@Table(name = "PUBLICATION_TABLE")
+@Table(name = "PUBLICATIONS")
 public class Publication {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -17,6 +18,7 @@ public class Publication {
     private String authorName;
     private LocalDate dateCreate;
 
+
     public Publication() {}
 
     public Publication(String name, String text, int authorId) {
@@ -26,6 +28,7 @@ public class Publication {
         this.authorId = authorId;
         dateCreate = LocalDate.now();
     }
+
 
     public void setId(int id) {
         this.id = id;
@@ -85,7 +88,14 @@ public class Publication {
 
     @Override
     public String toString() {
-        return "{\n id  =" + getId() + ", Name = " + getName() + ", Text = " + getText() + ", DateCreate = " + getDateCreate() + ", AuthorId = " + getAuthorId() +
-                ", AuthorName = " + getAuthorName() + "}";
+        return "Publication{" +
+                "id=" + id +
+                ", name='" + name + '\'' +
+                ", text='" + text + '\'' +
+                ", raiting=" + raiting +
+                ", authorId=" + authorId +
+                ", authorName='" + authorName + '\'' +
+                ", dateCreate=" + dateCreate +
+                '}';
     }
 }

@@ -39,16 +39,6 @@ public class ControllerPublication {
 
     @GetMapping("/")
     public String getAllPublication() {
-        Comment com = new Comment();
-        com.setAuthName("heh");
-        com.setAuthorId(6);
-        com.setDateCreate(LocalDate.now());
-        com.setParentId(88);
-        com.setPublicationId(4);
-        com.setRaiting(1);
-        com.setText("Tesxtoviy commentariy");
-
-        dao.getAllPublication();
-        return "{" + dao.createComment(com) + "}";
+        return "{" + dao.getAllPublication() + "}";
     }
 }
