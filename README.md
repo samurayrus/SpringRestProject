@@ -1,18 +1,18 @@
 # SpringRestProject
 
- -  Table1
+ - Таблица комментариев (user_id лишний)
  - ![Image alt](springrestproject/screens/Teble1.png)
- - Table2
+ - Таблица статей.
  - ![Image alt](springrestproject/screens/Table2.png)
- - Table3
+ - Таблица пользователей
  - ![Image alt](springrestproject/screens/Table3.png)
- - addUser
+ - Добавление нового пользователя
  - ![Image alt](springrestproject/screens/addUser.png)
- - getAllComments
+ - Получение всех комментариев
  - ![Image alt](springrestproject/screens/getAllComments.png)
- - getAllPublication
+ - Получение всех статей
  - ![Image alt](springrestproject/screens/getAllPublication.png)
- - getuserComments
+ - Получение всех комментариев конкретного пользователя
  - ![Image alt](springrestproject/screens/getuserComments.png)
- - getuserID
+ - Получение информации о пользователе по id
  - ![Image alt](springrestproject/screens/getuserID.png)
