@@ -13,7 +13,6 @@ public class Publication {
     private String name;
     private String text;
     private int raiting;
-
     private int authorId;
     private String authorName;
     private LocalDate dateCreate;
