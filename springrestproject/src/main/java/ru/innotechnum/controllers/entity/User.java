@@ -28,7 +28,8 @@ public class User {
         this.listCom = listCom;
     }
 
-    public User() {}
+    public User() {
+    }
 
     public User(String nickName, String aboutMe) {
         this.nickName = nickName;

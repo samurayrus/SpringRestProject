@@ -45,7 +45,7 @@ public class ControllerUser {
 
     @DeleteMapping("/{id}")
     public String deleteUser(@PathVariable int id) {
-        return editUser(id, "DELETED"," DELETED");
+        return editUser(id, "DELETED", " DELETED");
     }
 
 }

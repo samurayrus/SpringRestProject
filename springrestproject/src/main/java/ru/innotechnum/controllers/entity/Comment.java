@@ -4,7 +4,7 @@ import javax.persistence.*;
 import java.time.LocalDate;
 
 @Entity
-@Table(name="COMMENTS")
+@Table(name = "COMMENTS")
 public class Comment {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -18,7 +18,6 @@ public class Comment {
     private int authorId;
     @Column(name = "authname")
     private String authName;
-
     @Column(name = "publicationid")
     private int publicationId;
     @Column(name = "datecreate")
@@ -30,7 +29,8 @@ public class Comment {
     @JoinColumn(name = "user_id")
     private User user;
 
-    public Comment() {}
+    public Comment() {
+    }
 
     public Comment(String text, int authorId, int publicationId, int parentId) {
         this.text = text;
@@ -38,7 +38,7 @@ public class Comment {
         this.publicationId = publicationId;
         this.parentId = parentId;
         dateCreate = LocalDate.now();
-        raiting=0;
+        raiting = 0;
     }
 
     public int getPublicationId() {

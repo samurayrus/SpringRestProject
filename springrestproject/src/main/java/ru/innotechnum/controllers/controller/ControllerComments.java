@@ -17,7 +17,7 @@ public class ControllerComments {
 
     @PostMapping("/add/{text}/{authorId}/{publicationId}/{parentId}")
     public String addComment(@PathVariable String text, @PathVariable int authorId, @PathVariable int publicationId, @PathVariable int parentId) {
-        Comment com = new Comment(text,authorId, publicationId, parentId );
+        Comment com = new Comment(text, authorId, publicationId, parentId);
         return dao.createComment(com);
     }
 

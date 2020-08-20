@@ -19,7 +19,8 @@ public class Publication {
     private LocalDate dateCreate;
 
 
-    public Publication() {}
+    public Publication() {
+    }
 
     public Publication(String name, String text, int authorId) {
         raiting = 0;
