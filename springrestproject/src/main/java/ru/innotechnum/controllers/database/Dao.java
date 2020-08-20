@@ -4,6 +4,7 @@ import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
 import javax.transaction.Transactional;
 
+import ru.innotechnum.controllers.entity.Comment;
 import ru.innotechnum.controllers.entity.Publication;
 import ru.innotechnum.controllers.entity.User;
 import org.springframework.stereotype.Repository;
@@ -17,6 +18,11 @@ public class Dao {
     private EntityManager entityManager;
 
     public String createUser(User user) {
+        entityManager.persist(user);
+        return "OK";
+    }
+
+    public String createComment(Comment user) {
         entityManager.persist(user);
         return "OK";
     }

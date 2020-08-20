@@ -1,10 +1,13 @@
 package ru.innotechnum.controllers.controller;
 
 import ru.innotechnum.controllers.database.Dao;
+import ru.innotechnum.controllers.entity.Comment;
 import ru.innotechnum.controllers.entity.Publication;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.MediaType;
 import org.springframework.web.bind.annotation.*;
+
+import java.time.LocalDate;
 
 @RestController
 @RequestMapping(value = "/publication", produces = MediaType.APPLICATION_JSON_VALUE)
@@ -36,6 +39,15 @@ public class ControllerPublication {
 
     @GetMapping("/")
     public String getAllPublication() {
+        Comment com = new Comment();
+        com.setAuthName("heh");
+        com.setAuthorId(3);
+        com.setDateCreate(LocalDate.now());
+        com.setParentId(88);
+        com.setPublicationId(4);
+        com.setRaiting(1);
+        com.setText("Tesxtoviy commentariy");
+        dao.createComment(com);
         return "{" + dao.getAllPublication().toString() + "}";
     }
 }

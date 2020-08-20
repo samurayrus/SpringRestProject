@@ -14,15 +14,15 @@ public class Comment {
     private String text;
     @Column(name = "raiting")
     private int raiting;
-    @Column(name = "authorId")
+    @Column(name = "authorid")
     private int authorId;
-    @Column(name = "authName")
+    @Column(name = "authname")
     private String authName;
-    @Column(name = "publicationId")
+    @Column(name = "publicationid")
     private int publicationId;
-    @Column(name = "DateCreate")
+    @Column(name = "datecreate")
     private LocalDate DateCreate;
-    @Column(name = "parentId")
+    @Column(name = "parentid")
     private int parentId;
 
     public Comment() {}
