@@ -15,10 +15,8 @@ public class ControllerPublication {
     @Autowired
     private Dao dao;
 
-    @PostMapping("/{name}/{text}/{authorId}")
-    public String addPub(@PathVariable String name, @PathVariable String text, @PathVariable int authorId) {
-        Publication publ = new Publication(name, text, authorId);
-        System.out.println(publ.toString());
+    @PostMapping("/")
+    public String addPub(@RequestBody Publication publ) {
         return dao.createPublication(publ);
     }
 

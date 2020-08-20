@@ -23,3 +23,11 @@ springrestproject/target/classes/ru/innotechnum/controllers/entity/User.class
 springrestproject/target/classes/ru/innotechnum/controllers/entity/Publication.class
 springrestproject/target/classes/ru/innotechnum/controllers/PaymentRequest.class
 springrestproject/.idea/vcs.xml
+springrestproject/target/classes/ru/innotechnum/controllers/entity/Comment.class
+springrestproject/target/classes/ru/innotechnum/controllers/controller/ControllerComments.class
+springrestproject/target/classes/ru/innotechnum/controllers/BaseRequest.class
+springrestproject/target/classes/META-INF/spring-rest-project.kotlin_module
+springrestproject/target/classes/ru/innotechnum/controllers/controller/ControllerComments.class
+springrestproject/target/classes/ru/innotechnum/controllers/entity/Comment.class
+springrestproject/target/classes/ru/innotechnum/controllers/entity/Comment.class
+springrestproject/target/classes/ru/innotechnum/controllers/controller/ControllerComments.class

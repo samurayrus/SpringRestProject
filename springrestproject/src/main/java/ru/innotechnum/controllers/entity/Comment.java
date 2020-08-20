@@ -29,6 +29,8 @@ public class Comment {
     @JoinColumn(name = "user_id")
     private User user;
 
+    private int tester;
+
     public Comment() {
     }
 
@@ -39,6 +41,7 @@ public class Comment {
         this.parentId = parentId;
         dateCreate = LocalDate.now();
         raiting = 0;
+        tester = 1;
     }
 
     public int getPublicationId() {

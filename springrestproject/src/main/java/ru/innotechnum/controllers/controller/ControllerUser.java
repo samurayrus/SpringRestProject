@@ -1,6 +1,6 @@
 package ru.innotechnum.controllers.controller;
 
-import ru.innotechnum.controllers.BaseResponse;
+import ru.innotechnum.controllers.BaseRequest;
 import ru.innotechnum.controllers.database.Dao;
 import ru.innotechnum.controllers.entity.User;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -14,17 +14,10 @@ public class ControllerUser {
     @Autowired
     private Dao dao;
 
-    @PostMapping("/add/{name}/{about}")
-    public String addUser(@PathVariable String name, @PathVariable String about) {
-        User user = new User(name, about);
-        System.out.println(user.toString());
+    @PostMapping("/{name}/{about}")
+    //@ResponseStatus(HttpStatus.CREATED)
+    public String addUser(@PathVariable String name, @RequestBody User user) {
         return dao.createUser(user);
-    }
-
-    @PostMapping("/test") //Не работает!
-    @ResponseStatus(HttpStatus.CREATED)
-    public String test(@RequestBody BaseResponse request) {
-        return request.getStatus() + request.getCode();
     }
 
     @GetMapping("/Raiting/{id}")
@@ -32,20 +25,19 @@ public class ControllerUser {
         return dao.getUserRaiting(id);
     }
 
-    @PutMapping("/{id}/{name}/{about}")
-    public String editUser(@PathVariable int id, @PathVariable String name, @PathVariable String about) {
-        User user = new User(name, about);
+    @PutMapping("/{id}")
+    public String editUser(@PathVariable int id, @RequestBody User user) {
         return dao.editUser(user, id);
     }
 
-    @GetMapping("/info/{id}")
+    @GetMapping("/{id}")
     public String getUserInfo(@PathVariable int id) {
         return dao.findUser(id).toString();
     }
 
     @DeleteMapping("/{id}")
     public String deleteUser(@PathVariable int id) {
-        return editUser(id, "DELETED", " DELETED");
+        return editUser(id, new User("DELETED", "DELETED"));
     }
 
 }
