@@ -1,18 +1,18 @@
 # SpringRestProject
 
- Table1
+ -  Table1
  - ![Image alt](springrestproject/screens/Teble1.png)
-Table2
+ - Table2
  - ![Image alt](springrestproject/screens/Table2.png)
-Table3
+ - Table3
  - ![Image alt](springrestproject/screens/Table3.png)
-addUser
+ - addUser
  - ![Image alt](springrestproject/screens/addUser.png)
-getAllComments
+ - getAllComments
  - ![Image alt](springrestproject/screens/getAllComments.png)
-getAllPublication
+ - getAllPublication
  - ![Image alt](springrestproject/screens/getAllPublication.png)
-getuserComments
+ - getuserComments
  - ![Image alt](springrestproject/screens/getuserComments.png)
-getuserID
+ - getuserID
  - ![Image alt](springrestproject/screens/getuserID.png)
