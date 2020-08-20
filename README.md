@@ -1,7 +1,7 @@
 # SpringRestProject
 
  Table1
-![Image alt](springrestproject/screens/Teble1.png)
+ - ![Image alt](springrestproject/screens/Teble1.png)
 Table2
 ![Image alt](springrestproject/screens/Table2.png)
 Table3
