@@ -14,7 +14,7 @@ public class Publication {
     private String text;
     private int raiting;
 
-    @ManyToOne(cascade = CascadeType.ALL)
+    @ManyToOne//(cascade = CascadeType.ALL)
     @JoinColumn(name = "author_id")
     private User user;
 

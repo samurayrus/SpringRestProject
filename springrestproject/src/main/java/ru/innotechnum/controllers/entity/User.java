@@ -24,12 +24,13 @@ public class User {
     private List<Publication> listPubl;
 
     public User() {
+        dateReg = LocalDate.now();
     }
 
     public User(String nickName, String aboutMe) {
+        this();
         this.nickName = nickName;
         this.aboutMe = aboutMe;
-        dateReg = LocalDate.now();
     }
 
     public List<Publication> getListPubl() {

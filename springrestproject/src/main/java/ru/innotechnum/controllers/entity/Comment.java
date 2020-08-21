@@ -4,6 +4,7 @@ import com.fasterxml.jackson.annotation.JsonIgnore;
 
 import javax.persistence.*;
 import java.time.LocalDate;
+import java.util.List;
 
 @Entity
 @Table(name = "COMMENTS")
@@ -19,16 +20,21 @@ public class Comment {
     @Column(name = "authname")
     private String authName;
 
-    @ManyToOne(cascade = CascadeType.ALL)
+    @ManyToOne //(cascade = CascadeType.ALL)
     @JoinColumn(name = "publicationid")
     private Publication publication;
 
     @Column(name = "datecreate")
     private LocalDate dateCreate;
-    @Column(name = "parentid")
-    private int parentId;
 
-    @ManyToOne(cascade = CascadeType.ALL)
+    @ManyToOne  //(cascade = CascadeType.ALL)
+    @JoinColumn(name = "parentid")
+    private Comment comment;
+
+    @OneToMany(targetEntity=Comment.class, mappedBy = "comment", cascade = CascadeType.ALL, orphanRemoval = true)
+    private List<Comment> commentList;
+
+    @ManyToOne //(cascade = CascadeType.ALL)
     @JoinColumn(name = "user_id")
     private User user;
 
@@ -36,10 +42,28 @@ public class Comment {
     private int authorId;
     @Transient
     private int publicationId;
+    @Transient
+    private int parentId;
 
     public Comment() {
         dateCreate = LocalDate.now();
         raiting = 0;
+    }
+
+    public Comment getComment() {
+        return comment;
+    }
+
+    public void setComment(Comment comment) {
+        this.comment = comment;
+    }
+
+    public List<Comment> getCommentList() {
+        return commentList;
+    }
+
+    public void setCommentList(List<Comment> commentList) {
+        this.commentList = commentList;
     }
 
     public Publication getPublication() {

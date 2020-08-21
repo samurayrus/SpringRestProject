@@ -22,4 +22,8 @@ public class ControllerComments {
         return dao.findUser(id).getListCom().toString(); //Пока выводит всю информацию о пользователе + все комментарии
     }
 
+    @DeleteMapping("/{id}")
+    public String deleteComment(@PathVariable int id) {
+        return dao.deleteComment(id);
+    }
 }

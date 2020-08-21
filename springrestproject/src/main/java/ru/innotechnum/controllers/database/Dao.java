@@ -23,6 +23,7 @@ public class Dao {
     }
 
     public String createComment(Comment comm) {
+        comm.setComment(entityManager.find(Comment.class, comm.getParentId()));
         comm.setPublication(entityManager.find(Publication.class, comm.getPublicationId()));
         comm.setUser(findUser(comm.getAuthorId()));
         comm.setAuthName(comm.getUser().getNickName());
@@ -30,6 +31,11 @@ public class Dao {
         return findUser(comm.getAuthorId()).toString();
     }
 
+    public String deleteComment(int id) {
+        entityManager.remove(entityManager.find(Comment.class, id));
+
+        return "entityManager.find(Comment.class, id).toString()";
+    }
 
     public User findUser(int id) {
         User user = entityManager.find(User.class, id);

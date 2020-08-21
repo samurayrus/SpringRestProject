@@ -14,9 +14,9 @@ public class ControllerUser {
     @Autowired
     private Dao dao;
 
-    @PostMapping("/{name}/{about}")
+    @PostMapping("/")
     //@ResponseStatus(HttpStatus.CREATED)
-    public String addUser(@PathVariable String name, @RequestBody User user) {
+    public String addUser(@RequestBody User user) {
         return dao.createUser(user);
     }
 
