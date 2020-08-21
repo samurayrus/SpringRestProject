@@ -1,10 +1,8 @@
 package ru.innotechnum.controllers.controller;
 
-import ru.innotechnum.controllers.BaseRequest;
 import ru.innotechnum.controllers.database.Dao;
 import ru.innotechnum.controllers.entity.User;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.http.HttpStatus;
 import org.springframework.http.MediaType;
 import org.springframework.web.bind.annotation.*;
 
@@ -21,7 +19,7 @@ public class ControllerUser {
 
     @GetMapping("/{id}")
     public String getUserInfo(@PathVariable int id) {
-        return dao.findUser(id).toString();
+        return dao.getUser(id).toString();
     }
 
     @PostMapping("/")

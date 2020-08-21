@@ -1,13 +1,10 @@
 package ru.innotechnum.controllers.controller;
 
 import ru.innotechnum.controllers.database.Dao;
-import ru.innotechnum.controllers.entity.Comment;
 import ru.innotechnum.controllers.entity.Publication;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.MediaType;
 import org.springframework.web.bind.annotation.*;
-
-import java.time.LocalDate;
 
 @RestController
 @RequestMapping(value = "/publication", produces = MediaType.APPLICATION_JSON_VALUE)
@@ -17,12 +14,12 @@ public class ControllerPublication {
 
     @GetMapping("/")
     public String getAllPublication() {
-        return "{" + dao.getAllPublication() + "}";
+        return "{" + dao.getAllPublicationNew() + "}";
     }
 
     @GetMapping("/{id}")
     public String getPublication(@PathVariable int id) {
-        return null;
+        return dao.getPublication(id).toString();
     }
     @GetMapping("/user/{id}")
     public String getPublicationAllForAuthor(@PathVariable int id) {
@@ -31,22 +28,22 @@ public class ControllerPublication {
 
     @GetMapping("/byRaiting/")
     public String getPublicationTop() {
-        return null;
+        return dao.getAllPublicationRaiting().toString();
     }
 
     @GetMapping("/byComments/")
     public String getPublicationPopular() {
-        return null;
+        return dao.getAllPublicationComments().toString();
     }
 
     @GetMapping("/byNew/")
     public String getPublicationNew() {
-        return null;
+        return dao.getAllPublicationNew().toString();
     }
 
     @GetMapping("/byOld/")
     public String getPublicationOld() {
-        return null;
+        return dao.getAllPublicationOld().toString();
     }
 
     @PostMapping("/")

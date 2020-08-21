@@ -19,7 +19,7 @@ public class ControllerComments {
 
     @GetMapping("/usercomments/{id}")
     public String getUserComments(@PathVariable int id) {
-        return dao.findUser(id).getListCom().toString(); //Пока выводит всю информацию о пользователе + все комментарии
+        return dao.getUser(id).getListCom().toString(); //Пока выводит всю информацию о пользователе + все комментарии
     }
 
     @DeleteMapping("/{id}")
