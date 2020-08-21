@@ -15,9 +15,48 @@ public class ControllerPublication {
     @Autowired
     private Dao dao;
 
+    @GetMapping("/")
+    public String getAllPublication() {
+        return "{" + dao.getAllPublication() + "}";
+    }
+
+    @GetMapping("/{id}")
+    public String getPublication(@PathVariable int id) {
+        return null;
+    }
+    @GetMapping("/user/{id}")
+    public String getPublicationAllForAuthor(@PathVariable int id) {
+        return null;
+    }
+
+    @GetMapping("/byRaiting/")
+    public String getPublicationTop() {
+        return null;
+    }
+
+    @GetMapping("/byComments/")
+    public String getPublicationPopular() {
+        return null;
+    }
+
+    @GetMapping("/byNew/")
+    public String getPublicationNew() {
+        return null;
+    }
+
+    @GetMapping("/byOld/")
+    public String getPublicationOld() {
+        return null;
+    }
+
     @PostMapping("/")
     public String addPub(@RequestBody Publication publ) {
         return dao.createPublication(publ);
+    }
+
+    @PostMapping("/raiting/{id}")
+    public String addPublicationRaiting(@PathVariable int id) {
+        return dao.addRaiting(id);
     }
 
     @PutMapping("/{id}/{name}/{about}")
@@ -30,13 +69,7 @@ public class ControllerPublication {
         return dao.editPublication(id, "DELETED", "DELETED");
     }
 
-    @PostMapping("/{id}")
-    public String addPublicationRaiting(@PathVariable int id) {
-        return dao.addRaiting(id);
-    }
 
-    @GetMapping("/")
-    public String getAllPublication() {
-        return "{" + dao.getAllPublication() + "}";
-    }
+
+
 }

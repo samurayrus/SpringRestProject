@@ -14,25 +14,25 @@ public class ControllerUser {
     @Autowired
     private Dao dao;
 
+    @GetMapping("/Raiting/{id}")
+    public String getRaiting(@PathVariable int id) {
+        return dao.getUserRaiting(id);
+    }
+
+    @GetMapping("/{id}")
+    public String getUserInfo(@PathVariable int id) {
+        return dao.findUser(id).toString();
+    }
+
     @PostMapping("/")
     //@ResponseStatus(HttpStatus.CREATED)
     public String addUser(@RequestBody User user) {
         return dao.createUser(user);
     }
 
-    @GetMapping("/Raiting/{id}")
-    public String getRaiting(@PathVariable int id) {
-        return dao.getUserRaiting(id);
-    }
-
     @PutMapping("/{id}")
     public String editUser(@PathVariable int id, @RequestBody User user) {
         return dao.editUser(user, id);
-    }
-
-    @GetMapping("/{id}")
-    public String getUserInfo(@PathVariable int id) {
-        return dao.findUser(id).toString();
     }
 
     @DeleteMapping("/{id}")

@@ -26,4 +26,29 @@ public class ControllerComments {
     public String deleteComment(@PathVariable int id) {
         return dao.deleteComment(id);
     }
+
+    @GetMapping("/publication/{id}")
+    public String getCommentAllPublication(@PathVariable int id) {
+        return null;
+    }
+    @GetMapping("/{id}")
+    public String getComment(@PathVariable int id) {
+        return null;
+    }
+
+    @GetMapping("/")
+    public String getLastComment(@PathVariable int id) {
+        return null;
+    }
+
+    @PutMapping("/{id}")
+    public String editComment(@PathVariable int id) {
+        return null;
+    }
+
+    @PutMapping("/raiting/{id}")
+    public String updateCommentRaiting(@PathVariable int id) {
+        return null;
+    }
+
 }
