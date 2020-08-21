@@ -17,16 +17,11 @@ public class User {
     private String aboutMe;
     private LocalDate dateReg;
 
-    @OneToMany(mappedBy = "user", cascade = CascadeType.ALL, orphanRemoval = true)
+    @OneToMany(targetEntity=Comment.class, mappedBy = "user", cascade = CascadeType.ALL, orphanRemoval = true)
     private List<Comment> listCom;
 
-    public List<Comment> getListCom() {
-        return listCom;
-    }
-
-    public void setListCom(List<Comment> listCom) {
-        this.listCom = listCom;
-    }
+    @OneToMany(targetEntity=Publication.class, mappedBy = "user", cascade = CascadeType.ALL, orphanRemoval = true)
+    private List<Publication> listPubl;
 
     public User() {
     }
@@ -35,6 +30,22 @@ public class User {
         this.nickName = nickName;
         this.aboutMe = aboutMe;
         dateReg = LocalDate.now();
+    }
+
+    public List<Publication> getListPubl() {
+        return listPubl;
+    }
+
+    public void setListPubl(List<Publication> listPubl) {
+        this.listPubl = listPubl;
+    }
+
+    public List<Comment> getListCom() {
+        return listCom;
+    }
+
+    public void setListCom(List<Comment> listCom) {
+        this.listCom = listCom;
     }
 
     public void setId(int id) {

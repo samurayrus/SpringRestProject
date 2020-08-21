@@ -1,5 +1,7 @@
 package ru.innotechnum.controllers.entity;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
+
 import javax.persistence.*;
 import java.time.LocalDate;
 
@@ -14,12 +16,13 @@ public class Comment {
     private String text;
     @Column(name = "raiting")
     private int raiting;
-    @Column(name = "authorid")
-    private int authorId;
     @Column(name = "authname")
     private String authName;
-    @Column(name = "publicationid")
-    private int publicationId;
+
+    @ManyToOne(cascade = CascadeType.ALL)
+    @JoinColumn(name = "publicationid")
+    private Publication publication;
+
     @Column(name = "datecreate")
     private LocalDate dateCreate;
     @Column(name = "parentid")
@@ -29,20 +32,31 @@ public class Comment {
     @JoinColumn(name = "user_id")
     private User user;
 
-    private int tester;
+    @Transient
+    private int authorId;
+    @Transient
+    private int publicationId;
 
     public Comment() {
-    }
-
-    public Comment(String text, int authorId, int publicationId, int parentId) {
-        this.text = text;
-        this.authorId = authorId;
-        this.publicationId = publicationId;
-        this.parentId = parentId;
         dateCreate = LocalDate.now();
         raiting = 0;
-        tester = 1;
     }
+
+    public Publication getPublication() {
+        return publication;
+    }
+
+    public void setPublication(Publication publication) {
+        this.publication = publication;
+    }
+// public Comment(String text, int authorId, int publicationId, int parentId) {
+   //     this.text = text;
+    //    this.authorId = authorId;
+    //    this.publicationId = publicationId;
+   //     this.parentId = parentId;
+    //    dateCreate = LocalDate.now();
+    //    raiting = 0;
+   // }
 
     public int getPublicationId() {
         return publicationId;

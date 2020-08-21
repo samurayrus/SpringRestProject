@@ -23,6 +23,7 @@ public class Dao {
     }
 
     public String createComment(Comment comm) {
+        comm.setPublication(entityManager.find(Publication.class, comm.getPublicationId()));
         comm.setUser(findUser(comm.getAuthorId()));
         comm.setAuthName(comm.getUser().getNickName());
         entityManager.persist(comm);
@@ -64,7 +65,9 @@ public class Dao {
     }
 
     public String createPublication(Publication publication) {
-        publication.setAuthorName(entityManager.find(User.class, publication.getAuthorId()).getNickName());
+        User user = entityManager.find(User.class, publication.getAuthorId());
+        publication.setUser(user);
+        publication.setAuthorName(user.getNickName());
         entityManager.persist(publication);
         return publication.getAuthorName();
     }

@@ -13,22 +13,40 @@ public class Publication {
     private String name;
     private String text;
     private int raiting;
-    private int authorId;
+
+    @ManyToOne(cascade = CascadeType.ALL)
+    @JoinColumn(name = "author_id")
+    private User user;
+
     private String authorName;
     private LocalDate dateCreate;
 
+    @OneToMany(targetEntity=Comment.class, mappedBy = "publication", cascade = CascadeType.ALL, orphanRemoval = true)
+    private List<Comment> commentList;
+
+    @Transient
+    private int authorId;
 
     public Publication() {
-    }
-
-    public Publication(String name, String text, int authorId) {
         raiting = 0;
-        this.name = name;
-        this.text = text;
-        this.authorId = authorId;
         dateCreate = LocalDate.now();
     }
 
+    public List<Comment> getCommentList() {
+        return commentList;
+    }
+
+    public void setCommentList(List<Comment> commentList) {
+        this.commentList = commentList;
+    }
+
+    public User getUser() {
+        return user;
+    }
+
+    public void setUser(User user) {
+        this.user = user;
+    }
 
     public void setId(int id) {
         this.id = id;
