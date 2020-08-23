@@ -1,6 +1,7 @@
 package ru.innotechnum.controllers.controller;
 
 import ru.innotechnum.controllers.database.Dao;
+import ru.innotechnum.controllers.database.PublicationRepository;
 import ru.innotechnum.controllers.entity.Publication;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.MediaType;
@@ -11,20 +12,19 @@ import org.springframework.web.bind.annotation.*;
 public class ControllerPublication {
     @Autowired
     private Dao dao;
+    @Autowired
+    private PublicationRepository publicationRepository;
 
     @GetMapping("/")
     public String getAllPublication() {
-        return "{" + dao.getAllPublicationNew() + "}";
+        return "{" + publicationRepository.findAll() + "}";
     }
 
     @GetMapping("/{id}")
     public String getPublication(@PathVariable int id) {
-        return dao.getPublication(id).toString();
+        return publicationRepository.findById(id).toString();
     }
-    @GetMapping("/user/{id}")
-    public String getPublicationAllForAuthor(@PathVariable int id) {
-        return null;
-    }
+
 
     @GetMapping("/byRaiting/")
     public String getPublicationTop() {
@@ -48,12 +48,16 @@ public class ControllerPublication {
 
     @PostMapping("/")
     public String addPub(@RequestBody Publication publ) {
-        return dao.createPublication(publ);
+        publicationRepository.save(publ);
+        return "saved";
     }
 
     @PostMapping("/raiting/{id}")
     public String addPublicationRaiting(@PathVariable int id) {
-        return dao.addRaiting(id);
+        Publication publ = publicationRepository.findById(id);
+        publ.setRaiting(publ.getRaiting()+1);
+        publicationRepository.flush();
+        return "Now raiting =" + publ.getRaiting();
     }
 
     @PutMapping("/{id}/{name}/{about}")
