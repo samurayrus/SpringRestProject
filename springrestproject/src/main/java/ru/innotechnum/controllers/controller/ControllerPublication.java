@@ -7,11 +7,12 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.MediaType;
 import org.springframework.web.bind.annotation.*;
 
+import java.util.Comparator;
+import java.util.List;
+
 @RestController
 @RequestMapping(value = "/publication", produces = MediaType.APPLICATION_JSON_VALUE)
 public class ControllerPublication {
-    @Autowired
-    private Dao dao;
     @Autowired
     private PublicationRepository publicationRepository;
 
@@ -28,22 +29,24 @@ public class ControllerPublication {
 
     @GetMapping("/byRaiting/")
     public String getPublicationTop() {
-        return dao.getAllPublicationRaiting().toString();
+        return publicationRepository.findOrderByRaitingDesc().toString();
     }
 
     @GetMapping("/byComments/")
     public String getPublicationPopular() {
-        return dao.getAllPublicationComments().toString();
+        List<Publication> listPubl = publicationRepository.findOrderByIdDesc();
+        listPubl.stream().sorted(Comparator.comparing(x-> x.getCommentList().size()));
+        return listPubl.toString();
     }
 
     @GetMapping("/byNew/")
     public String getPublicationNew() {
-        return dao.getAllPublicationNew().toString();
+        return publicationRepository.findOrderByIdDesc().toString();
     }
 
     @GetMapping("/byOld/")
     public String getPublicationOld() {
-        return dao.getAllPublicationOld().toString();
+        return publicationRepository.findOrderByIdAsc().toString();
     }
 
     @PostMapping("/")
@@ -60,14 +63,26 @@ public class ControllerPublication {
         return "Now raiting =" + publ.getRaiting();
     }
 
-    @PutMapping("/{id}/{name}/{about}")
-    public String editPublication(@PathVariable int id, @PathVariable String name, @PathVariable String about) {
-        return dao.editPublication(id, name, about);
+    @PutMapping("/{id}")
+    public String editPublication(@PathVariable int id, @RequestBody Publication publ) {
+        if (publicationRepository.existsById(id)) {
+            Publication orig = publicationRepository.findById(id);
+            if(publ.getName()!=null)
+            orig.setName(publ.getName());
+            if(publ.getText()!=null)
+            orig.setText(publ.getText());
+            publicationRepository.flush();
+            return orig.toString();
+        } else
+        return "NotFound";
     }
 
     @DeleteMapping("/{id}")
     public String deletePublication(@PathVariable int id) {
-        return dao.editPublication(id, "DELETED", "DELETED");
+        Publication publ = new Publication();
+        publ.setName("DELETED");
+        publ.setText("DELETED");
+        return editPublication(id, publ);
     }
 
 
