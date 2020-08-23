@@ -33,3 +33,5 @@ springrestproject/target/classes/ru/innotechnum/controllers/entity/Comment.class
 springrestproject/target/classes/ru/innotechnum/controllers/controller/ControllerComments.class
 springrestproject/target/classes/ru/innotechnum/controllers/controller/ControllerComments.class
 springrestproject/target/classes/ru/innotechnum/controllers/entity/Comment.class
+springrestproject/target/classes/ru/innotechnum/controllers/entity/Comment.class
+springrestproject/src/main/java/ru/innotechnum/controllers/entity/Comment.java
