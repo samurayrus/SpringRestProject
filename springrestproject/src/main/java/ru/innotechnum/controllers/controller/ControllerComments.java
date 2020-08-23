@@ -3,6 +3,7 @@ package ru.innotechnum.controllers.controller;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.MediaType;
 import org.springframework.web.bind.annotation.*;
+import ru.innotechnum.controllers.database.CommentRepository;
 import ru.innotechnum.controllers.database.Dao;
 import ru.innotechnum.controllers.entity.Comment;
 
@@ -11,10 +12,13 @@ import ru.innotechnum.controllers.entity.Comment;
 public class ControllerComments {
     @Autowired
     private Dao dao;
+    @Autowired
+    private CommentRepository commentRepository;
 
     @PostMapping("/")
     public String addComment(@RequestBody Comment com) {
-        return dao.createComment(com);
+        commentRepository.save(com);
+        return "OK";
     }
 
     @GetMapping("/usercomments/{id}")
@@ -24,16 +28,18 @@ public class ControllerComments {
 
     @DeleteMapping("/{id}")
     public String deleteComment(@PathVariable int id) {
-        return dao.deleteComment(id);
+        commentRepository.deleteById(id);
+        return "deleted";
     }
 
     @GetMapping("/publication/{id}")
     public String getCommentAllPublication(@PathVariable int id) {
         return null;
     }
+
     @GetMapping("/{id}")
     public String getComment(@PathVariable int id) {
-        return null;
+        return commentRepository.findById(id).toString();
     }
 
     @GetMapping("/")

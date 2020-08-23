@@ -73,14 +73,6 @@ public class Comment {
     public void setPublication(Publication publication) {
         this.publication = publication;
     }
-// public Comment(String text, int authorId, int publicationId, int parentId) {
-   //     this.text = text;
-    //    this.authorId = authorId;
-    //    this.publicationId = publicationId;
-   //     this.parentId = parentId;
-    //    dateCreate = LocalDate.now();
-    //    raiting = 0;
-   // }
 
     public int getPublicationId() {
         return publicationId;
