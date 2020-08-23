@@ -81,6 +81,17 @@ public class User {
         return dateReg;
     }
 
+    public int getRaiting() {
+        int raiting = 0;
+        for(Comment comment : getListCom()) {
+            raiting += comment.getRaiting();
+        }
+        for(Publication publ : getListPubl()) {
+            raiting += publ.getRaiting();
+        }
+        return raiting;
+    }
+
     @Override
     public String toString() {
         return "User{" +

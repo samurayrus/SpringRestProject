@@ -4,26 +4,24 @@ import ru.innotechnum.controllers.database.CommentRepository;
 import ru.innotechnum.controllers.database.Dao;
 import ru.innotechnum.controllers.database.PublicationRepository;
 import ru.innotechnum.controllers.database.UserRepository;
+import ru.innotechnum.controllers.entity.Comment;
+import ru.innotechnum.controllers.entity.Publication;
 import ru.innotechnum.controllers.entity.User;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.MediaType;
 import org.springframework.web.bind.annotation.*;
 
+import java.util.List;
+
 @RestController
 @RequestMapping(value = "/user", produces = MediaType.APPLICATION_JSON_VALUE) //Для /test
 public class ControllerUser {
     @Autowired
-    private Dao dao;
-    @Autowired
     private UserRepository userRepository;
-    @Autowired
-    private CommentRepository commentRepository;
-    @Autowired
-    private PublicationRepository publicationRepository;
 
     @GetMapping("/Raiting/{id}")
     public String getRaiting(@PathVariable int id) {
-        return userRepository.findById(id).toString();
+        return "{Raiting = " + userRepository.findById(id).getRaiting() + "}";
     }
 
     @GetMapping("/{id}")

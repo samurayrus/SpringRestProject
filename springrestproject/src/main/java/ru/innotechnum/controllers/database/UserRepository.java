@@ -10,4 +10,5 @@ public interface UserRepository extends CrudRepository<User,Integer> {
     void saveAndFlush(User oldUser);
 
     void flush();
+
 }
