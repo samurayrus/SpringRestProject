@@ -1,11 +1,11 @@
 package ru.innotechnum.controllers;
 
-public class BaseRequest {
+public class BaseResponse {
 
     private String Status;
     private String code;
 
-    public BaseRequest(String status, String code) {
+    public BaseResponse(String status, String code) {
         Status = status;
         this.code = code;
     }

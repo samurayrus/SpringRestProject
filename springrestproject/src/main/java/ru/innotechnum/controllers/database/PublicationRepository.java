@@ -10,16 +10,11 @@ public interface PublicationRepository extends CrudRepository<Publication, Integ
 
     Publication findById(int id);
 
-    // List<Publication> findAll();
-
     List<Publication> findTop10ByOrderByIdAsc();
 
     List<Publication> findTop10ByOrderByIdDesc();
 
-    //findTop10ByOrderByLevelDesc
-
     List<Publication> findTop10ByOrderByRaitingDesc();
-
 
     void saveAndFlush(Publication oldUser);
 

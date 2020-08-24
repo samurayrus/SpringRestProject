@@ -29,7 +29,6 @@ public class Dao {
         return user;
     }
 
-
     public String createPublication(Publication publication) {
         User user = entityManager.find(User.class, publication.getAuthorId());
         publication.setUser(user);

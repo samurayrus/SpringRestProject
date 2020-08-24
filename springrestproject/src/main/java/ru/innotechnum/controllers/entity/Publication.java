@@ -114,7 +114,6 @@ public class Publication {
                 ", authorId=" + authorId +
                 ", authorName='" + authorName + '\'' +
                 ", dateCreate=" + dateCreate +
-                "comments{{}}: " + getCommentList().toString() +
                 '}';
     }
 }
