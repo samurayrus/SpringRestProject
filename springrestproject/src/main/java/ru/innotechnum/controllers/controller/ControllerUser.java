@@ -24,6 +24,11 @@ public class ControllerUser {
         return "{Raiting = " + userRepository.findById(id).getRaiting() + "}";
     }
 
+    @GetMapping("/comments/{id}")
+    public String getUserComments(@PathVariable int id) {
+        return userRepository.findById(id).getListCom().toString();
+    }
+
     @GetMapping("/publications/{id}")
     public String getPublicationAllForAuthor(@PathVariable int id) {
         return userRepository.findById(id).getListPubl().toString();

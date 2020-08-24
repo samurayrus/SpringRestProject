@@ -21,7 +21,7 @@ public class Publication {
     private String authorName;
     private LocalDate dateCreate;
 
-    @OneToMany(targetEntity=Comment.class, mappedBy = "publication", cascade = CascadeType.ALL, orphanRemoval = true)
+    @OneToMany(targetEntity = Comment.class, mappedBy = "publication", cascade = CascadeType.ALL, orphanRemoval = true)
     private List<Comment> commentList;
 
     @Transient
@@ -114,6 +114,7 @@ public class Publication {
                 ", authorId=" + authorId +
                 ", authorName='" + authorName + '\'' +
                 ", dateCreate=" + dateCreate +
+                "comments{{}}: " + getCommentList().toString() +
                 '}';
     }
 }

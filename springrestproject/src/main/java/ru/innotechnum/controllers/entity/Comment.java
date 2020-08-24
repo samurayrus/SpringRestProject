@@ -31,7 +31,7 @@ public class Comment {
     @JoinColumn(name = "parentid")
     private Comment comment;
 
-    @OneToMany(targetEntity=Comment.class, mappedBy = "comment", cascade = CascadeType.ALL, orphanRemoval = true)
+    @OneToMany(targetEntity = Comment.class, mappedBy = "comment", cascade = CascadeType.ALL, orphanRemoval = true)
     private List<Comment> commentList;
 
     @ManyToOne //(cascade = CascadeType.ALL)

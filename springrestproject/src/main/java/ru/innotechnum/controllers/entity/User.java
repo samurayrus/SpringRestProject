@@ -17,10 +17,10 @@ public class User {
     private String aboutMe;
     private LocalDate dateReg;
 
-    @OneToMany(targetEntity=Comment.class, mappedBy = "user", cascade = CascadeType.ALL, orphanRemoval = true)
+    @OneToMany(targetEntity = Comment.class, mappedBy = "user", cascade = CascadeType.ALL, orphanRemoval = true)
     private List<Comment> listCom;
 
-    @OneToMany(targetEntity=Publication.class, mappedBy = "user", cascade = CascadeType.ALL, orphanRemoval = true)
+    @OneToMany(targetEntity = Publication.class, mappedBy = "user", cascade = CascadeType.ALL, orphanRemoval = true)
     private List<Publication> listPubl;
 
     public User() {
@@ -83,10 +83,10 @@ public class User {
 
     public int getRaiting() {
         int raiting = 0;
-        for(Comment comment : getListCom()) {
+        for (Comment comment : getListCom()) {
             raiting += comment.getRaiting();
         }
-        for(Publication publ : getListPubl()) {
+        for (Publication publ : getListPubl()) {
             raiting += publ.getRaiting();
         }
         return raiting;

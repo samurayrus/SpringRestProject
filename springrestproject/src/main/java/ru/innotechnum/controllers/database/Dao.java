@@ -12,6 +12,7 @@ import org.springframework.stereotype.Repository;
 import java.util.Comparator;
 import java.util.List;
 
+@Deprecated
 @Repository
 @Transactional
 public class Dao {
@@ -56,7 +57,7 @@ public class Dao {
 
     public List<Publication> getAllPublicationComments() {
         List<Publication> list = entityManager.createQuery("from Publication", Publication.class).getResultList();
-        list.stream().sorted(Comparator.comparing(x-> x.getCommentList().size()));
+        list.stream().sorted(Comparator.comparing(x -> x.getCommentList().size()));
         return list;
     }
 
@@ -101,8 +102,6 @@ public class Dao {
         var publ = entityManager.createQuery("Select SUM(raiting) from Publication where author_id=" + id).getResultList().get(0);
         return publ.toString();
     }
-
-
 
 
 }
