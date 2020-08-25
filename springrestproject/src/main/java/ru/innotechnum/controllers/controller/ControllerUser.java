@@ -1,16 +1,15 @@
 package ru.innotechnum.controllers.controller;
 
-import ru.innotechnum.controllers.database.CommentRepository;
-import ru.innotechnum.controllers.database.Dao;
-import ru.innotechnum.controllers.database.PublicationRepository;
-import ru.innotechnum.controllers.database.UserRepository;
+import ru.innotechnum.controllers.database.*;
 import ru.innotechnum.controllers.entity.Comment;
+import ru.innotechnum.controllers.entity.HistoryUser;
 import ru.innotechnum.controllers.entity.Publication;
 import ru.innotechnum.controllers.entity.User;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.MediaType;
 import org.springframework.web.bind.annotation.*;
 
+import java.time.LocalDate;
 import java.util.List;
 
 @RestController
@@ -18,6 +17,8 @@ import java.util.List;
 public class ControllerUser {
     @Autowired
     private UserRepository userRepository;
+    @Autowired
+    private HistoryUserRepository historyUserRepository;
 
     @GetMapping("/Raiting/{id}")
     public String getRaiting(@PathVariable int id) {
@@ -43,7 +44,17 @@ public class ControllerUser {
     //@ResponseStatus(HttpStatus.CREATED)
     public String addUser(@RequestBody User user) {
         userRepository.save(user);
+        addHistoryUser(user);
         return "created";
+    }
+
+    private void addHistoryUser(User user) {
+        HistoryUser historyUser = new HistoryUser();
+        historyUser.setNickName(user.getNickName());
+        historyUser.setAboutMe(user.getAboutMe());
+        historyUser.setDateBegin(LocalDate.now());
+        historyUser.setUser(user);
+        historyUserRepository.save(historyUser);
     }
 
     @PutMapping("/{id}")
@@ -52,7 +63,13 @@ public class ControllerUser {
             User oldUser = userRepository.findById(id);
             oldUser.setNickName(user.getNickName());
             oldUser.setAboutMe(user.getAboutMe());
+
+            List<HistoryUser> hisUs = oldUser.getHistoryUsers();
+            hisUs.get(hisUs.size()-1).setDateEnd(LocalDate.now());
+
             userRepository.flush();
+
+            addHistoryUser(oldUser);
             return oldUser.toString();
         } else {
             return "NotFound";

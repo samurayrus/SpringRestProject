@@ -23,6 +23,9 @@ public class User {
     @OneToMany(targetEntity = Publication.class, mappedBy = "user", cascade = CascadeType.ALL, orphanRemoval = true)
     private List<Publication> listPubl;
 
+    @OneToMany(targetEntity = HistoryUser.class, mappedBy = "user", cascade = CascadeType.ALL, orphanRemoval = true)
+    private List<HistoryUser> historyUsers;
+
     public User() {
         dateReg = LocalDate.now();
     }
@@ -31,6 +34,14 @@ public class User {
         this();
         this.nickName = nickName;
         this.aboutMe = aboutMe;
+    }
+
+    public List<HistoryUser> getHistoryUsers() {
+        return historyUsers;
+    }
+
+    public void setHistoryUsers(List<HistoryUser> historyUsers) {
+        this.historyUsers = historyUsers;
     }
 
     public List<Publication> getListPubl() {
