@@ -6,6 +6,9 @@ import org.springframework.web.bind.annotation.*;
 import ru.innotechnum.controllers.BaseResponse;
 import ru.innotechnum.controllers.database.CommentRepository;
 import ru.innotechnum.controllers.entity.Comment;
+import ru.innotechnum.controllers.entity.Publication;
+
+import java.util.List;
 
 @RestController
 @RequestMapping(value = "/comment", produces = MediaType.APPLICATION_JSON_VALUE)
@@ -26,13 +29,13 @@ public class ControllerComments {
     }
 
     @GetMapping("/{id}")
-    public String getComment(@PathVariable int id) {
-        return commentRepository.findById(id).toString();
+    public Comment getComment(@PathVariable int id) {
+        return commentRepository.findById(id);
     }
 
     @GetMapping("/")
-    public String getLastComment(@PathVariable int id) {
-        return commentRepository.findTop10ByOrderByIdDesc().toString();
+    public List<Comment> getLastComment(@PathVariable int id) {
+        return commentRepository.findTop10ByOrderByIdDesc();
     }
 
     @PutMapping("/{id}")

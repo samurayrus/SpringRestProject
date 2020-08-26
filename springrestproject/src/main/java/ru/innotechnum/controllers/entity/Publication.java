@@ -1,5 +1,7 @@
 package ru.innotechnum.controllers.entity;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
+
 import javax.persistence.*;
 import java.time.LocalDate;
 import java.util.List;
@@ -32,6 +34,7 @@ public class Publication {
         dateCreate = LocalDate.now();
     }
 
+    @JsonIgnore
     public List<Comment> getCommentList() {
         return commentList;
     }
@@ -40,6 +43,7 @@ public class Publication {
         this.commentList = commentList;
     }
 
+    @JsonIgnore
     public User getUser() {
         return user;
     }

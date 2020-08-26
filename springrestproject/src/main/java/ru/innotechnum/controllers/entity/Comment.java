@@ -50,6 +50,7 @@ public class Comment {
         raiting = 0;
     }
 
+    @JsonIgnore
     public Comment getComment() {
         return comment;
     }
@@ -58,6 +59,7 @@ public class Comment {
         this.comment = comment;
     }
 
+    @JsonIgnore
     public List<Comment> getCommentList() {
         return commentList;
     }
@@ -66,6 +68,7 @@ public class Comment {
         this.commentList = commentList;
     }
 
+    @JsonIgnore
     public Publication getPublication() {
         return publication;
     }

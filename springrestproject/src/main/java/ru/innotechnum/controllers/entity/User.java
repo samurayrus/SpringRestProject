@@ -36,6 +36,7 @@ public class User {
         this.aboutMe = aboutMe;
     }
 
+    @JsonIgnore
     public List<HistoryUser> getHistoryUsers() {
         return historyUsers;
     }
@@ -44,6 +45,7 @@ public class User {
         this.historyUsers = historyUsers;
     }
 
+    @JsonIgnore
     public List<Publication> getListPubl() {
         return listPubl;
     }
@@ -52,6 +54,7 @@ public class User {
         this.listPubl = listPubl;
     }
 
+    @JsonIgnore
     public List<Comment> getListCom() {
         return listCom;
     }

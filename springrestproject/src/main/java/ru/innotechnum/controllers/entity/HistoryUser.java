@@ -1,6 +1,8 @@
 package ru.innotechnum.controllers.entity;
 
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
+
 import javax.persistence.*;
 import java.time.LocalDate;
 import java.util.List;
@@ -63,6 +65,7 @@ public class HistoryUser {
         this.dateEnd = dateEnd;
     }
 
+    @JsonIgnore
     public User getUser() {
         return user;
     }

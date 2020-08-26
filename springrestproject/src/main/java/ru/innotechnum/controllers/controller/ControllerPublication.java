@@ -3,6 +3,7 @@ package ru.innotechnum.controllers.controller;
 import ru.innotechnum.controllers.database.Dao;
 import ru.innotechnum.controllers.database.PublicationRepository;
 import ru.innotechnum.controllers.database.UserRepository;
+import ru.innotechnum.controllers.entity.Comment;
 import ru.innotechnum.controllers.entity.Publication;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.MediaType;
@@ -28,34 +29,34 @@ public class ControllerPublication {
     }
 
     @GetMapping("/{id}")
-    public String getPublication(@PathVariable int id) {
-        return publicationRepository.findById(id).toString();
+    public Publication getPublication(@PathVariable int id) {
+        return publicationRepository.findById(id);
     }
 
     @GetMapping("/comments/{id}")
-    public String getCommentAllPublication(@PathVariable int id) {
-        return publicationRepository.findById(id).getCommentList().toString();
+    public List<Comment> getCommentAllPublication(@PathVariable int id) {
+        return publicationRepository.findById(id).getCommentList();
     }
 
     @GetMapping("/byRaiting/")
-    public String getPublicationTop() {
-        return publicationRepository.findTop10ByOrderByRaitingDesc().toString();
+    public List<Publication> getPublicationTop() {
+        return publicationRepository.findTop10ByOrderByRaitingDesc();
     }
 
     @GetMapping("/byComments/")
-    public String getPublicationPopular() {
+    public List<Publication> getPublicationPopular() {
         List<Publication> listPubl = (List<Publication>) publicationRepository.findAll();
-        return listPubl.stream().sorted(Comparator.comparing(x -> x.getCommentList().size())).limit(10).collect(Collectors.toList()).toString();
+        return listPubl.stream().sorted(Comparator.comparing(x -> x.getCommentList().size())).limit(10).collect(Collectors.toList());
     }
 
     @GetMapping("/byNew/")
-    public String getPublicationNew() {
-        return publicationRepository.findTop10ByOrderByIdDesc().toString();
+    public List<Publication> getPublicationNew() {
+        return publicationRepository.findTop10ByOrderByIdDesc();
     }
 
     @GetMapping("/byOld/")
-    public String getPublicationOld() {
-        return publicationRepository.findTop10ByOrderByIdAsc().toString();
+    public List<Publication> getPublicationOld() {
+        return publicationRepository.findTop10ByOrderByIdAsc();
     }
 
     @PostMapping("/")

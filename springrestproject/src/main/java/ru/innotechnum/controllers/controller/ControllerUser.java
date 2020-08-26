@@ -1,5 +1,6 @@
 package ru.innotechnum.controllers.controller;
 
+import org.springframework.http.HttpStatus;
 import ru.innotechnum.controllers.database.*;
 import ru.innotechnum.controllers.entity.Comment;
 import ru.innotechnum.controllers.entity.HistoryUser;
@@ -20,28 +21,33 @@ public class ControllerUser {
     @Autowired
     private HistoryUserRepository historyUserRepository;
 
+    public ControllerUser(UserRepository userRepository, HistoryUserRepository historyUserRepository) {
+        this.userRepository = userRepository;
+        this.historyUserRepository = historyUserRepository;
+    }
+
     @GetMapping("/Raiting/{id}")
     public String getRaiting(@PathVariable int id) {
         return "{Raiting = " + userRepository.findById(id).getRaiting() + "}";
     }
 
     @GetMapping("/comments/{id}")
-    public String getUserComments(@PathVariable int id) {
-        return userRepository.findById(id).getListCom().toString();
+    public List<Comment> getUserComments(@PathVariable int id) {
+        return userRepository.findById(id).getListCom();
     }
 
     @GetMapping("/publications/{id}")
-    public String getPublicationAllForAuthor(@PathVariable int id) {
-        return userRepository.findById(id).getListPubl().toString();
+    public List<Publication> getPublicationAllForAuthor(@PathVariable int id) {
+        return userRepository.findById(id).getListPubl();
     }
 
     @GetMapping("/{id}")
-    public String getUserInfo(@PathVariable int id) {
-        return userRepository.findById(id).toString();
+    public User getUserInfo(@PathVariable int id) {
+        return userRepository.findById(id);
     }
 
     @PostMapping("/")
-    //@ResponseStatus(HttpStatus.CREATED)
+    @ResponseStatus(HttpStatus.CREATED)
     public String addUser(@RequestBody User user) {
         userRepository.save(user);
         addHistoryUser(user);
@@ -70,7 +76,7 @@ public class ControllerUser {
             userRepository.flush();
 
             addHistoryUser(oldUser);
-            return oldUser.toString();
+            return "Edited";
         } else {
             return "NotFound";
         }
