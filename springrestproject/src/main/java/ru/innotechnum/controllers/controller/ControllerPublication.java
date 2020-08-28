@@ -1,10 +1,6 @@
 package ru.innotechnum.controllers.controller;
 
-import org.springframework.data.domain.Page;
-import org.springframework.data.domain.PageRequest;
-import org.springframework.data.domain.Pageable;
-import org.springframework.data.domain.Sort;
-import ru.innotechnum.controllers.database.Dao;
+import org.springframework.http.HttpStatus;
 import ru.innotechnum.controllers.database.PublicationRepository;
 import ru.innotechnum.controllers.database.UserRepository;
 import ru.innotechnum.controllers.entity.Comment;
@@ -13,7 +9,6 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.MediaType;
 import org.springframework.web.bind.annotation.*;
 
-import java.util.Collections;
 import java.util.Comparator;
 import java.util.List;
 import java.util.stream.Collectors;
@@ -28,13 +23,8 @@ public class ControllerPublication {
 
 
     @GetMapping("/")
-    public String getAllPublication() {
-
-       // Page<Publication> allPublicationsSortedByName = publicationRepository.findAll(Sort.by("name"));
-
-
-
-        return "{" + publicationRepository.findAll() + "}";
+    public Iterable<Publication> getAllPublication() {
+        return publicationRepository.findAll();
     }
 
     @GetMapping("/{id}")
@@ -69,18 +59,18 @@ public class ControllerPublication {
     }
 
     @PostMapping("/")
-    public String addPub(@RequestBody Publication publ) {
+    @ResponseStatus(HttpStatus.CREATED)
+    public void addPub(@RequestBody Publication publ) {
         publ.setAuthorName(userRepository.findById(publ.getAuthorId()).getNickName());
         publicationRepository.save(publ);
-        return "saved";
     }
 
-    @PostMapping("/{id}/raiting")
+    @PostMapping("/{id}/addraiting")
     public String addPublicationRaiting(@PathVariable int id) {
         Publication publ = publicationRepository.findById(id);
         publ.setRaiting(publ.getRaiting() + 1);
         publicationRepository.flush();
-        return "Now raiting =" + publ.getRaiting();
+        return "{New raiting =" + publ.getRaiting() + " }";
     }
 
     @PutMapping("/{id}")

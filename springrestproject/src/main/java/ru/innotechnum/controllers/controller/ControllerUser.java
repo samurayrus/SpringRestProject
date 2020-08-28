@@ -57,15 +57,14 @@ public class ControllerUser {
                 return historyUser.getNickName();
             }
         }
-        return "list";
+        return "cant find";
     }
 
     @PostMapping("/")
     @ResponseStatus(HttpStatus.CREATED)
-    public String addUser(@RequestBody User user) {
+    public void addUser(@RequestBody User user) {
         userRepository.save(user);
         addHistoryUser(user);
-        return "created";
     }
 
     private void addHistoryUser(User user) {
@@ -93,7 +92,7 @@ public class ControllerUser {
             userRepository.flush();
 
             addHistoryUser(oldUser);
-            return "Edited";
+            return "ok";
         } else {
             return "NotFound";
         }

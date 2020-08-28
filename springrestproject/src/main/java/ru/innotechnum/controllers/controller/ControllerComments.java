@@ -1,6 +1,7 @@
 package ru.innotechnum.controllers.controller;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
 import org.springframework.http.MediaType;
 import org.springframework.web.bind.annotation.*;
 import ru.innotechnum.controllers.BaseResponse;
@@ -17,15 +18,15 @@ public class ControllerComments {
     private CommentRepository commentRepository;
 
     @PostMapping("/")
-    public String addComment(@RequestBody Comment com) {
+    @ResponseStatus(HttpStatus.CREATED)
+    public void addComment(@RequestBody Comment com) {
         commentRepository.save(com);
-        return new BaseResponse("POST","OK").toString();
     }
 
     @DeleteMapping("/{id}")
     public String deleteComment(@PathVariable int id) {
         commentRepository.deleteById(id);
-        return new BaseResponse("DELETE","OK").toString();
+        return "ok";
     }
 
     @GetMapping("/{id}")
@@ -45,20 +46,20 @@ public class ControllerComments {
             if (comment.getText() != null)
                 orig.setText(comment.getText());
             commentRepository.flush();
-            return orig.toString();
+            return "ok";
         } else
-            return new BaseResponse("Error","NotFound").toString();
+            return "NotFound";
     }
 
-    @PutMapping("/{id}/raiting")
+    @PutMapping("/{id}/addraiting")
     public String updateCommentRaiting(@PathVariable int id) {
         if (commentRepository.existsById(id)) {
             Comment orig = commentRepository.findById(id);
             orig.setRaiting(orig.getRaiting() + 1);
             commentRepository.flush();
-            return new BaseResponse("PUT","Raiting Added. New Raiting = " + orig.getRaiting() ).toString();
+            return "New Raiting = " + orig.getRaiting();
         } else
-            return new BaseResponse("Error","Not Found").toString();
+            return "NotFound";
     }
 
 }
