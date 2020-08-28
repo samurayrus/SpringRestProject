@@ -85,7 +85,7 @@ public class Comment {
         this.publicationId = publicationId;
     }
 
-
+    @JsonIgnore
     public User getUser() {
         return user;
     }

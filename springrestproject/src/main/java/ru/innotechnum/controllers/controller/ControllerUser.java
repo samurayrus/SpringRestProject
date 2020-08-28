@@ -27,8 +27,8 @@ public class ControllerUser {
     }
 
     @GetMapping("/{id}/raiting")
-    public String getRaiting(@PathVariable int id) {
-        return "{Raiting = " + userRepository.findById(id).getRaiting() + "}";
+    public Integer getRaiting(@PathVariable int id) {
+        return  userRepository.findById(id).getRaiting();
     }
 
     @GetMapping("/{id}/comments")
