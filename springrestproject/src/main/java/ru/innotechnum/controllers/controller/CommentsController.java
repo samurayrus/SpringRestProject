@@ -13,7 +13,7 @@ import java.util.List;
 
 @RestController
 @RequestMapping(value = "/comment", produces = MediaType.APPLICATION_JSON_VALUE)
-public class ControllerComments {
+public class CommentsController {
     @Autowired
     private CommentRepository commentRepository;
 

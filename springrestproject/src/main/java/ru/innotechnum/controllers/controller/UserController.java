@@ -15,20 +15,20 @@ import java.util.List;
 
 @RestController
 @RequestMapping(value = "/user", produces = MediaType.APPLICATION_JSON_VALUE) //Для /test
-public class ControllerUser {
+public class UserController {
     @Autowired
     private UserRepository userRepository;
     @Autowired
     private HistoryUserRepository historyUserRepository;
 
-    public ControllerUser(UserRepository userRepository, HistoryUserRepository historyUserRepository) {
+    public UserController(UserRepository userRepository, HistoryUserRepository historyUserRepository) {
         this.userRepository = userRepository;
         this.historyUserRepository = historyUserRepository;
     }
 
     @GetMapping("/{id}/raiting")
     public Integer getRaiting(@PathVariable int id) {
-        return  userRepository.findById(id).getRaiting();
+        return userRepository.findById(id).getRaiting();
     }
 
     @GetMapping("/{id}/comments")
@@ -46,18 +46,28 @@ public class ControllerUser {
         return userRepository.findById(id);
     }
 
-    @GetMapping("/test")
-    public String getTest() { //Возврат никнейма по дате изменения
-        int id=14;
-        LocalDate ld = LocalDate.of(2020,8,27);
-        List<HistoryUser> list =  userRepository.findById(id).getHistoryUsers();
-        for(HistoryUser historyUser : list) {
-            if(historyUser.getDateBegin().compareTo(ld)<0 && historyUser.getDateEnd().compareTo(ld)>0)
-            {
+    private List<Comment> addNicknameToComments(List<Comment> list) {
+
+        for (Comment com : list) {
+            addNickname(com);
+        }
+        return list;
+    }
+
+    private Comment addNickname(Comment com) {
+        com.setAuthName(getTest(com.getUser().getId()));
+        return com;
+    }
+
+    private String getTest(int id) { //Возврат никнейма по дате изменения
+        LocalDate ld = LocalDate.now();
+        List<HistoryUser> list = userRepository.findById(id).getHistoryUsers();
+        for (HistoryUser historyUser : list) {
+            if (historyUser.getDateBegin().compareTo(ld) < 0 && historyUser.getDateEnd().compareTo(ld) > 0) {
                 return historyUser.getNickName();
             }
         }
-        return "cant find";
+        return "NotFound";
     }
 
     @PostMapping("/")
@@ -72,7 +82,7 @@ public class ControllerUser {
         historyUser.setNickName(user.getNickName());
         historyUser.setAboutMe(user.getAboutMe());
         historyUser.setDateBegin(LocalDate.now());
-        historyUser.setDateEnd(LocalDate.of(2999,1,1));
+        historyUser.setDateEnd(LocalDate.of(2999, 1, 1));
         historyUser.setUser(user);
         historyUserRepository.save(historyUser);
     }
@@ -81,13 +91,15 @@ public class ControllerUser {
     public String editUser(@PathVariable int id, @RequestBody User user) {
         if (userRepository.existsById(id)) {
             User oldUser = userRepository.findById(id);
-            if(oldUser.getDeleted()) { return "DELETED";}
+            if (oldUser.getDeleted()) {
+                return "DELETED";
+            }
             oldUser.setNickName(user.getNickName());
             oldUser.setAboutMe(user.getAboutMe());
             oldUser.setDeleted(user.getDeleted());
 
             List<HistoryUser> hisUs = oldUser.getHistoryUsers();
-            hisUs.get(hisUs.size()-1).setDateEnd(LocalDate.now());
+            hisUs.get(hisUs.size() - 1).setDateEnd(LocalDate.now());
 
             userRepository.flush();
 

@@ -15,7 +15,7 @@ import java.util.stream.Collectors;
 
 @RestController
 @RequestMapping(value = "/publication", produces = MediaType.APPLICATION_JSON_VALUE)
-public class ControllerPublication {
+public class PublicationController {
     @Autowired
     private PublicationRepository publicationRepository;
     @Autowired
