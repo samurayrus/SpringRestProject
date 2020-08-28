@@ -7,6 +7,7 @@ import ru.innotechnum.controllers.entity.HistoryUser;
 import ru.innotechnum.controllers.entity.Publication;
 
 import java.time.LocalDate;
+import java.sql.Date;
 import java.util.List;
 
 public interface HistoryUserRepository extends CrudRepository<HistoryUser, Integer> {
@@ -16,6 +17,9 @@ public interface HistoryUserRepository extends CrudRepository<HistoryUser, Integ
     List<HistoryUser> findTop10ByOrderByIdAsc();
 
     void flush();
+
+    //@Query(value="from HISTORY where thisdate BETWEEN : date_begin AND :date_end")
+  //  public List<HistoryUser> getForDates(@Param("thisdate") LocalDate thisDate);
 
    // @Query("select a from HISTORY a where a.date_begin <= :creationDateTime")
    // List<HistoryUser> findAllWithCreationDateTimeBefore(

@@ -46,10 +46,19 @@ public class ControllerUser {
         return userRepository.findById(id);
     }
 
-  //  @GetMapping("/test/")
-  //  public List<HistoryUser> getTest() {
-   //     return historyUserRepository.findAllWithCreationDateTimeBefore(LocalDate.now());
-   // }
+    @GetMapping("/test")
+    public String getTest() { //Возврат никнейма по дате изменения
+        int id=14;
+        LocalDate ld = LocalDate.of(2020,8,27);
+        List<HistoryUser> list =  userRepository.findById(id).getHistoryUsers();
+        for(HistoryUser historyUser : list) {
+            if(historyUser.getDateBegin().compareTo(ld)<0 && historyUser.getDateEnd().compareTo(ld)>0)
+            {
+                return historyUser.getNickName();
+            }
+        }
+        return "list";
+    }
 
     @PostMapping("/")
     @ResponseStatus(HttpStatus.CREATED)
@@ -64,6 +73,7 @@ public class ControllerUser {
         historyUser.setNickName(user.getNickName());
         historyUser.setAboutMe(user.getAboutMe());
         historyUser.setDateBegin(LocalDate.now());
+        historyUser.setDateEnd(LocalDate.of(2999,1,1));
         historyUser.setUser(user);
         historyUserRepository.save(historyUser);
     }
@@ -72,8 +82,10 @@ public class ControllerUser {
     public String editUser(@PathVariable int id, @RequestBody User user) {
         if (userRepository.existsById(id)) {
             User oldUser = userRepository.findById(id);
+            if(oldUser.getDeleted()) { return "DELETED";}
             oldUser.setNickName(user.getNickName());
             oldUser.setAboutMe(user.getAboutMe());
+            oldUser.setDeleted(user.getDeleted());
 
             List<HistoryUser> hisUs = oldUser.getHistoryUsers();
             hisUs.get(hisUs.size()-1).setDateEnd(LocalDate.now());
@@ -89,7 +101,9 @@ public class ControllerUser {
 
     @DeleteMapping("/{id}")
     public String deleteUser(@PathVariable int id) {
-        return editUser(id, new User("DELETED", "DELETED"));
+        User user = new User("DELETED", "DELETED");
+        user.setDeleted(true);
+        return editUser(id, user);
     }
 
 }

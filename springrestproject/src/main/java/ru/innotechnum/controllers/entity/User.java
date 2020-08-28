@@ -16,6 +16,7 @@ public class User {
     private String nickName;
     private String aboutMe;
     private LocalDate dateReg;
+    private Boolean deleted;
 
     @OneToMany(targetEntity = Comment.class, mappedBy = "user", cascade = CascadeType.ALL, orphanRemoval = true)
     private List<Comment> listCom;
@@ -28,12 +29,21 @@ public class User {
 
     public User() {
         dateReg = LocalDate.now();
+        deleted = false;
     }
 
     public User(String nickName, String aboutMe) {
         this();
         this.nickName = nickName;
         this.aboutMe = aboutMe;
+    }
+
+    public Boolean getDeleted() {
+        return deleted;
+    }
+
+    public void setDeleted(Boolean deleted) {
+        this.deleted = deleted;
     }
 
     @JsonIgnore
