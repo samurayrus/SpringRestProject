@@ -26,17 +26,17 @@ public class ControllerUser {
         this.historyUserRepository = historyUserRepository;
     }
 
-    @GetMapping("/Raiting/{id}")
+    @GetMapping("/{id}/raiting")
     public String getRaiting(@PathVariable int id) {
         return "{Raiting = " + userRepository.findById(id).getRaiting() + "}";
     }
 
-    @GetMapping("/comments/{id}")
+    @GetMapping("/{id}/comments")
     public List<Comment> getUserComments(@PathVariable int id) {
         return userRepository.findById(id).getListCom();
     }
 
-    @GetMapping("/publications/{id}")
+    @GetMapping("/{id}/publications")
     public List<Publication> getPublicationAllForAuthor(@PathVariable int id) {
         return userRepository.findById(id).getListPubl();
     }
@@ -45,6 +45,11 @@ public class ControllerUser {
     public User getUserInfo(@PathVariable int id) {
         return userRepository.findById(id);
     }
+
+  //  @GetMapping("/test/")
+  //  public List<HistoryUser> getTest() {
+   //     return historyUserRepository.findAllWithCreationDateTimeBefore(LocalDate.now());
+   // }
 
     @PostMapping("/")
     @ResponseStatus(HttpStatus.CREATED)

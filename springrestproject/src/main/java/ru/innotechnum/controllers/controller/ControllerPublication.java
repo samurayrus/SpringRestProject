@@ -33,7 +33,7 @@ public class ControllerPublication {
         return publicationRepository.findById(id);
     }
 
-    @GetMapping("/comments/{id}")
+    @GetMapping("/{id}/comments")
     public List<Comment> getCommentAllPublication(@PathVariable int id) {
         return publicationRepository.findById(id).getCommentList();
     }
@@ -66,7 +66,7 @@ public class ControllerPublication {
         return "saved";
     }
 
-    @PostMapping("/raiting/{id}")
+    @PostMapping("/{id}/raiting")
     public String addPublicationRaiting(@PathVariable int id) {
         Publication publ = publicationRepository.findById(id);
         publ.setRaiting(publ.getRaiting() + 1);

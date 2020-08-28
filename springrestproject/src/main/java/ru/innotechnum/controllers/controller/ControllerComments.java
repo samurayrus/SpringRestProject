@@ -50,7 +50,7 @@ public class ControllerComments {
             return new BaseResponse("Error","NotFound").toString();
     }
 
-    @PutMapping("/raiting/{id}")
+    @PutMapping("/{id}/raiting")
     public String updateCommentRaiting(@PathVariable int id) {
         if (commentRepository.existsById(id)) {
             Comment orig = commentRepository.findById(id);
