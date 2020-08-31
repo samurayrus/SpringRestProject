@@ -43,27 +43,25 @@ public class PublicationController {
 
     @GetMapping("/byRaiting/")
     public List<Publication> getPublicationTop() {
-        return publicationRepository.findTop10ByOrderByRaitingDesc();
+        return publicationRepository.findTop10ByOrderByRaitingDesc(); //Оставил для разнообразия.  Pagination and sorting ниже
     }
 
     @GetMapping("/byComments/")
     public List<Publication> getPublicationPopular() {
         List<Publication> listPubl = (List<Publication>) publicationRepository.findAll();
-        return listPubl.stream().sorted(Comparator.comparing(x -> x.getCommentList().size())).limit(10).collect(Collectors.toList());
+        return listPubl.stream().sorted(Comparator.comparing(x -> x.getCommentList().size())).limit(10).collect(Collectors.toList());  //Кол-во комментариев в бд не хранится
     }
 
     @GetMapping("/byNew/")
     public Page<Publication> getPublicationNew() {
         Pageable paging = PageRequest.of(0, 10, Sort.by("id").descending());
         return publicationRepository.findAll(paging);
-  //      return publicationRepository.findTop10ByOrderByIdDesc();
     }
 
     @GetMapping("/byOld/")
     public Page<Publication> getPublicationOld() {
         Pageable paging = PageRequest.of(0, 10, Sort.by("id").ascending());
         return publicationRepository.findAll(paging);
-        //return publicationRepository.findTop10ByOrderByIdAsc();
     }
 
     @PostMapping("/")

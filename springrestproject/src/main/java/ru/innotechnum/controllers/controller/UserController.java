@@ -51,11 +51,13 @@ public class UserController {
 
     @PostMapping("/")
     @ResponseStatus(HttpStatus.CREATED)
+    @Transactional(rollbackFor = RuntimeException.class, propagation = Propagation.REQUIRED)
     public void addUser(@RequestBody User user) {
         userRepository.save(user);
         addHistoryUser(user);
     }
 
+    @Transactional(rollbackFor = RuntimeException.class, propagation = Propagation.REQUIRED)
     private void addHistoryUser(User user) {
         HistoryUser historyUser = new HistoryUser();
         historyUser.setNickName(user.getNickName());
@@ -64,11 +66,15 @@ public class UserController {
         historyUser.setDateEnd(LocalDate.of(2999, 1, 1));
         historyUser.setUser(user);
         historyUserRepository.save(historyUser);
+
+        // Тест транзакции. УБРАТЬ!!!
+        if(user.getNickName().equals("абубу23"))
+        throw new RuntimeException();
+        //...
     }
 
 
     @PutMapping("/{id}")
-    @Transactional(rollbackFor = RuntimeException.class, propagation = Propagation.REQUIRED) //тест транзакции
     public String editUser(@PathVariable int id, @RequestBody User user) {
         if (userRepository.existsById(id)) {
             User oldUser = userRepository.findById(id);
@@ -82,8 +88,8 @@ public class UserController {
             List<HistoryUser> hisUs = oldUser.getHistoryUsers();
             hisUs.get(hisUs.size() - 1).setDateEnd(LocalDate.now());
 
-            userRepository.flush();
             addHistoryUser(oldUser);
+            userRepository.flush();
             return "ok";
         } else {
             return "NotFound";

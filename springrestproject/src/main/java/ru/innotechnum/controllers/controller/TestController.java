@@ -36,14 +36,6 @@ public class TestController {
      * getTest - функционал
      */
 
-    @GetMapping("/getAllPublications")
-    public Iterable<Publication> findAlltest() {
-
-        //return publicationRepository.findAll(new PageRequest(0, 10, Sort.Direction.ASC, "id"));
-        return publicationRepository.findAll(Sort.by(Sort.Direction.ASC, "id"));
-    }
-
-
     @GetMapping("/{id}/comments")
     public List<Comment> getTestCom(@PathVariable int id) { //Возврат никнейма по дате изменения
         return addNicknameToComments(userRepository.findById(id).getListCom());
