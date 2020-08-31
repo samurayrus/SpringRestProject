@@ -1,5 +1,9 @@
 package ru.innotechnum.controllers.controller;
 
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.PageRequest;
+import org.springframework.data.domain.Pageable;
+import org.springframework.data.domain.Sort;
 import org.springframework.http.HttpStatus;
 import ru.innotechnum.controllers.database.PublicationRepository;
 import ru.innotechnum.controllers.database.UserRepository;
@@ -49,19 +53,24 @@ public class PublicationController {
     }
 
     @GetMapping("/byNew/")
-    public List<Publication> getPublicationNew() {
-        return publicationRepository.findTop10ByOrderByIdDesc();
+    public Page<Publication> getPublicationNew() {
+        Pageable paging = PageRequest.of(0, 10, Sort.by("id").descending());
+        return publicationRepository.findAll(paging);
+  //      return publicationRepository.findTop10ByOrderByIdDesc();
     }
 
     @GetMapping("/byOld/")
-    public List<Publication> getPublicationOld() {
-        return publicationRepository.findTop10ByOrderByIdAsc();
+    public Page<Publication> getPublicationOld() {
+        Pageable paging = PageRequest.of(0, 10, Sort.by("id").ascending());
+        return publicationRepository.findAll(paging);
+        //return publicationRepository.findTop10ByOrderByIdAsc();
     }
 
     @PostMapping("/")
     @ResponseStatus(HttpStatus.CREATED)
     public void addPub(@RequestBody Publication publ) {
-        publ.setAuthorName(userRepository.findById(publ.getAuthorId()).getNickName());
+        publ.setUser(userRepository.findById(publ.getAuthorId()));
+        publ.setAuthorName(publ.getUser().getNickName());
         publicationRepository.save(publ);
     }
 

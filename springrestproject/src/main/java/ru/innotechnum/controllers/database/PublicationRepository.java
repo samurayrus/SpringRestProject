@@ -19,6 +19,8 @@ public interface PublicationRepository extends PagingAndSortingRepository<Public
 
     List<Publication> findTop10ByOrderByRaitingDesc();
 
+    //Page<Publication> findTop10(Pageable pageable);
+
     void saveAndFlush(Publication oldUser);
 
     //Page<Publication> findAll(Pageable pageable);

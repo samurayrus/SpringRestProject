@@ -6,6 +6,8 @@ import org.springframework.http.MediaType;
 import org.springframework.web.bind.annotation.*;
 import ru.innotechnum.controllers.BaseResponse;
 import ru.innotechnum.controllers.database.CommentRepository;
+import ru.innotechnum.controllers.database.PublicationRepository;
+import ru.innotechnum.controllers.database.UserRepository;
 import ru.innotechnum.controllers.entity.Comment;
 import ru.innotechnum.controllers.entity.Publication;
 
@@ -16,10 +18,20 @@ import java.util.List;
 public class CommentsController {
     @Autowired
     private CommentRepository commentRepository;
+    @Autowired
+    private UserRepository userRepository;
+    @Autowired
+    private PublicationRepository publicationRepository;
 
     @PostMapping("/")
     @ResponseStatus(HttpStatus.CREATED)
     public void addComment(@RequestBody Comment com) {
+        com.setUser(userRepository.findById(com.getAuthorId()));
+        com.setAuthName(com.getUser().getNickName());
+        com.setPublication(publicationRepository.findById(com.getPublicationId()));
+        if(com.getParentId()!=0) {
+            com.setComment(commentRepository.findById(com.getParentId()));
+        }
         commentRepository.save(com);
     }
 
@@ -34,8 +46,13 @@ public class CommentsController {
         return commentRepository.findById(id);
     }
 
+    @GetMapping("/{id}/comments")
+    public List<Comment> getCommentComments(@PathVariable int id) {
+        return commentRepository.findById(id).getCommentList();
+    }
+
     @GetMapping("/")
-    public List<Comment> getLastComment(@PathVariable int id) {
+    public List<Comment> getLastComment() {
         return commentRepository.findTop10ByOrderByIdDesc();
     }
 
