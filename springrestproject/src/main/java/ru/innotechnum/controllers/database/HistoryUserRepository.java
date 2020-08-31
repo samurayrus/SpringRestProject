@@ -18,6 +18,17 @@ public interface HistoryUserRepository extends CrudRepository<HistoryUser, Integ
 
     void flush();
 
+   // @Query(value="from HISTORY where '2020-08-22' BETWEEN date_begin AND date_end") //WHERE start >= '2013-07-22' AND end <= '2013-06-13'
+  // @Query(value="from HISTORY where date_begin>=?1")
+
+   // @Query("select d from History d where d.dateBegin=date")
+   // List<HistoryUser> findByLastUpdatedInDate(@Param("date") LocalDate date);
+
+    //List<HistoryUser> findTop10Byuser_idWhereBetweendate_beginAnddate_end(int id, LocalDate date);
+
+
+    //List<HistoryUser> findTop10Byuser_idBetweendate_beginAnddate_end(int user_id, LocalDate date);
+
     //@Query(value="from HISTORY where thisdate BETWEEN : date_begin AND :date_end")
   //  public List<HistoryUser> getForDates(@Param("thisdate") LocalDate thisDate);
 

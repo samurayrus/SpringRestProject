@@ -1,6 +1,8 @@
 package ru.innotechnum.controllers.controller;
 
 import org.springframework.http.HttpStatus;
+import org.springframework.transaction.annotation.Propagation;
+import org.springframework.transaction.annotation.Transactional;
 import ru.innotechnum.controllers.database.*;
 import ru.innotechnum.controllers.entity.Comment;
 import ru.innotechnum.controllers.entity.HistoryUser;
@@ -46,29 +48,6 @@ public class UserController {
         return userRepository.findById(id);
     }
 
-    private List<Comment> addNicknameToComments(List<Comment> list) {
-
-        for (Comment com : list) {
-            addNickname(com);
-        }
-        return list;
-    }
-
-    private Comment addNickname(Comment com) {
-        com.setAuthName(getTest(com.getUser().getId()));
-        return com;
-    }
-
-    private String getTest(int id) { //Возврат никнейма по дате изменения
-        LocalDate ld = LocalDate.now();
-        List<HistoryUser> list = userRepository.findById(id).getHistoryUsers();
-        for (HistoryUser historyUser : list) {
-            if (historyUser.getDateBegin().compareTo(ld) < 0 && historyUser.getDateEnd().compareTo(ld) > 0) {
-                return historyUser.getNickName();
-            }
-        }
-        return "NotFound";
-    }
 
     @PostMapping("/")
     @ResponseStatus(HttpStatus.CREATED)
@@ -87,7 +66,9 @@ public class UserController {
         historyUserRepository.save(historyUser);
     }
 
+
     @PutMapping("/{id}")
+    @Transactional(rollbackFor = RuntimeException.class, propagation = Propagation.REQUIRED) //тест транзакции
     public String editUser(@PathVariable int id, @RequestBody User user) {
         if (userRepository.existsById(id)) {
             User oldUser = userRepository.findById(id);
@@ -102,13 +83,13 @@ public class UserController {
             hisUs.get(hisUs.size() - 1).setDateEnd(LocalDate.now());
 
             userRepository.flush();
-
             addHistoryUser(oldUser);
             return "ok";
         } else {
             return "NotFound";
         }
     }
+
 
     @DeleteMapping("/{id}")
     public String deleteUser(@PathVariable int id) {
