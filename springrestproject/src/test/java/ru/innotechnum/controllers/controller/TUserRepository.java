@@ -3,6 +3,7 @@ package ru.innotechnum.controllers.controller;
 import org.junit.Before;
 import org.junit.Test;
 import org.mockito.Mock;
+import org.mockito.Mockito;
 import org.mockito.MockitoAnnotations;
 import ru.innotechnum.controllers.database.HistoryUserRepository;
 import ru.innotechnum.controllers.database.UserRepository;
@@ -20,16 +21,17 @@ import java.util.List;
 
 public class TUserRepository {
 
+
     UserRepository userRepository;
-    UserController userController;
     HistoryUserRepository historyUserRepository;
-    
+
+    private UserController userController;
     private List<User> users;
 
     @Before
     public void setupMock() {
         userRepository = mock(UserRepository.class);
-        //userController = mock(UserController.class);
+        historyUserRepository = mock(HistoryUserRepository.class);
         userController = new UserController(userRepository, historyUserRepository);
         users = Arrays.asList(
                 new User("Test1", "Test2"),
@@ -46,21 +48,29 @@ public class TUserRepository {
         users.get(0).setListCom(Arrays.asList(
                 new Comment(0, "TEST", 3, users.get(0).getListPubl().get(0), users.get(0))
         ));
-        // MockitoAnnotations.initMocks(this);
+         //MockitoAnnotations.initMocks(this);
     }
 
 
     @Test
-    public void whenCall() {
+    public void testGetRepositoryUnit() {
         when(userRepository.findById(0)).thenReturn(users.get(0));
-        when(userRepository.existsById(0)).thenReturn(true);
 
         assertEquals(userRepository.findById(0), users.get(0));
         assertEquals(userController.getUserInfo(0), users.get(0));
-        assertEquals(userController.deleteUser(0), "ok");
         assertEquals(java.util.Optional.of(userController.getRaiting(0)), java.util.Optional.of(10));
 
-        verify(userRepository, times(4)).findById(0);
+        verify(userRepository, times(3)).findById(0);
+    }
+
+    @Test
+    public void whenDeleteSaveSaveHistory() {
+        when(userRepository.findById(0)).thenReturn(users.get(0));
+        when(userRepository.existsById(0)).thenReturn(true);
+        when(historyUserRepository.save(any(HistoryUser.class))).thenReturn(new HistoryUser());  //thenAnswer(i->i.getArguments()[0]); //Mockito.any()  --- Варианты. Запомнить
+
+        assertEquals(userController.deleteUser(0), "ok");
+        verify(historyUserRepository, times(1)).save(any(HistoryUser.class));
     }
 
 }

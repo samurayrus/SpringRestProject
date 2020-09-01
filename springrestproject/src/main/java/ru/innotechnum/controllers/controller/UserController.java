@@ -88,9 +88,9 @@ public class UserController {
             List<HistoryUser> hisUs = oldUser.getHistoryUsers();
             if (hisUs!=null) { //Временная заглушка для тестов
                 hisUs.get(hisUs.size() - 1).setDateEnd(LocalDate.now());
-
-                addHistoryUser(oldUser);
             }
+
+            addHistoryUser(oldUser);
             userRepository.flush();
             return "ok";
         } else {
