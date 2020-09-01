@@ -1,5 +1,5 @@
 package ru.innotechnum.controllers;
-
+@Deprecated
 public class BaseResponse {
 
     private String Status;

@@ -8,6 +8,7 @@ import org.springframework.http.MediaType;
 import org.springframework.transaction.annotation.Propagation;
 import org.springframework.transaction.annotation.Transactional;
 import org.springframework.web.bind.annotation.*;
+import ru.innotechnum.controllers.database.CommentRepository;
 import ru.innotechnum.controllers.database.HistoryUserRepository;
 import ru.innotechnum.controllers.database.PublicationRepository;
 import ru.innotechnum.controllers.database.UserRepository;
@@ -15,6 +16,7 @@ import ru.innotechnum.controllers.entity.Comment;
 import ru.innotechnum.controllers.entity.HistoryUser;
 import ru.innotechnum.controllers.entity.Publication;
 
+import java.sql.Date;
 import java.time.LocalDate;
 import java.util.Iterator;
 import java.util.List;
@@ -28,16 +30,26 @@ public class TestController {
     private HistoryUserRepository historyUserRepository;
     @Autowired
     private PublicationRepository publicationRepository;
+    @Autowired
+    private CommentRepository commentRepository;
 
     /*
      * Находим имя пользователя в таблице с историей изменения, приписываем его комментарию и возвращаем.
+     * getTestComHQL - Возвращаем комментарий через HQL запрос поиска в истории изменения данных юзера.
      * addNicknameToComments - для работы со списком
      * addNickname - для работы с одним комментарием
-     * getTest - функционал
+     * getTest - функционал. Выгружаем истроию изменения пользователя и через for ищем нужный.
      */
 
+    @GetMapping("/{id}/comments/HQL") //Возврат никнейма по дате изменения через HQL
+    public Comment getTestComHQL(@PathVariable int id) {
+       Comment com = commentRepository.findById(id);
+       com.setAuthName(historyUserRepository.findByUser(com.getDateCreate(), com.getUser()).getNickName());
+       return com;
+    }
+
     @GetMapping("/{id}/comments")
-    public List<Comment> getTestCom(@PathVariable int id) { //Возврат никнейма по дате изменения
+    public List<Comment> getTestCom(@PathVariable int id) { //Возврат никнейма по дате изменения через выгрузку
         return addNicknameToComments(userRepository.findById(id).getListCom());
     }
 
