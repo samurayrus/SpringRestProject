@@ -32,13 +32,13 @@ public class CommentsController {
         if(com.getParentId()!=0) {
             com.setComment(commentRepository.findById(com.getParentId()));
         }
-        commentRepository.save(com);
+         commentRepository.save(com);
     }
 
     @DeleteMapping("/{id}")
-    public String deleteComment(@PathVariable int id) {
+    @ResponseStatus(HttpStatus.NO_CONTENT)
+    public void deleteComment(@PathVariable int id) {
         commentRepository.deleteById(id);
-        return "ok";
     }
 
     @GetMapping("/{id}")

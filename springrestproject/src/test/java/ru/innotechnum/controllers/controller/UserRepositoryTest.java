@@ -56,7 +56,7 @@ public class UserRepositoryTest {
 
         assertEquals(userRepository.findById(id), users.get(id));
         assertEquals(userController.getUserInfo(id), users.get(id));
-        assertEquals(java.util.Optional.of(userController.getRaiting(id)), java.util.Optional.of(10));
+        assertEquals(java.util.Optional.of(userController.getRaiting(id)), java.util.Optional.of(15));
 
         verify(userRepository, times(3)).findById(id);
     }
