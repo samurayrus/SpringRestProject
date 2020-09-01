@@ -67,7 +67,7 @@ public class UserController {
         historyUser.setUser(user);
         historyUserRepository.save(historyUser);
 
-        // Тест транзакции. УБРАТЬ!!!
+        // Тест транзакции. Потом нужно убрать. Всё ок
         if(user.getNickName().equals("абубу23"))
         throw new RuntimeException();
         //...
@@ -86,9 +86,11 @@ public class UserController {
             oldUser.setDeleted(user.getDeleted());
 
             List<HistoryUser> hisUs = oldUser.getHistoryUsers();
-            hisUs.get(hisUs.size() - 1).setDateEnd(LocalDate.now());
+            if (hisUs!=null) { //Временная заглушка для тестов
+                hisUs.get(hisUs.size() - 1).setDateEnd(LocalDate.now());
 
-            addHistoryUser(oldUser);
+                addHistoryUser(oldUser);
+            }
             userRepository.flush();
             return "ok";
         } else {

@@ -2,6 +2,8 @@ package ru.innotechnum.controllers.controller;
 
 import org.junit.Before;
 import org.junit.Test;
+import org.mockito.Mock;
+import org.mockito.MockitoAnnotations;
 import ru.innotechnum.controllers.database.HistoryUserRepository;
 import ru.innotechnum.controllers.database.UserRepository;
 import ru.innotechnum.controllers.entity.Publication;
@@ -9,6 +11,8 @@ import ru.innotechnum.controllers.entity.User;
 import ru.innotechnum.controllers.entity.Comment;
 import ru.innotechnum.controllers.entity.HistoryUser;
 
+import static org.junit.Assert.*;
+import static org.junit.Assert.assertEquals;
 import static org.mockito.Mockito.*;
 
 import java.util.Arrays;
@@ -19,13 +23,15 @@ public class TUserRepository {
     UserRepository userRepository;
     UserController userController;
     HistoryUserRepository historyUserRepository;
+
+
     private List<User> users;
 
     @Before
     public void setupMock() {
         userRepository = mock(UserRepository.class);
-        userController = mock(UserController.class);
-
+        //userController = mock(UserController.class);
+        userController = new UserController(userRepository,historyUserRepository);
         users = Arrays.asList(
                 new User("Test1", "Test2"),
                 new User("Test2", "Test2"),
@@ -47,20 +53,25 @@ public class TUserRepository {
         publ2.setName("testasdPubn");
         publ2.setRaiting(2);
         users.get(0).setListPubl(Arrays.asList(publ,publ2));
+        Comment comment = new Comment();
+        comment.setUser(users.get(0));
+        comment.setRaiting(3);
+        comment.setText("asd");
+        users.get(0).setListCom(Arrays.asList(comment));
+       // MockitoAnnotations.initMocks(this);
     }
 
     @Test
     public void whenCall() {
         when(userRepository.findById(0)).thenReturn(users.get(0));
-        //when(userRepository.save(users.get(0))).thenReturn(users.get(0));
-       // when(historyUserRepository).thenReturn(null);
-       // when(historyUserRepository.save).thenReturn();
+        when(userRepository.existsById(0)).thenReturn(true);
 
-        System.out.println(userRepository.findById(0).toString());
-        System.out.println(userController.getUserInfo(0));
-        //System.out.println(userController.getRaiting(0));
+        assertEquals(userRepository.findById(0), users.get(0));
+        assertEquals(userController.getUserInfo(0), users.get(0));
+        assertEquals(userController.deleteUser(0), "ok");
+        assertEquals(java.util.Optional.of(userController.getRaiting(0)), java.util.Optional.of(10));
 
-       // userController.addUser(users.get(0));
+        verify(userRepository, times(4)).findById(0);
     }
 
 }
