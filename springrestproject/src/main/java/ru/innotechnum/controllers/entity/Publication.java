@@ -34,6 +34,15 @@ public class Publication {
         dateCreate = LocalDate.now();
     }
 
+    public Publication(String name, String text, int raiting, User user, String authorName) {
+        this();
+        this.name = name;
+        this.text = text;
+        this.raiting = raiting;
+        this.user = user;
+        this.authorName = authorName;
+    }
+
     @JsonIgnore
     public List<Comment> getCommentList() {
         return commentList;

@@ -23,43 +23,32 @@ public class TUserRepository {
     UserRepository userRepository;
     UserController userController;
     HistoryUserRepository historyUserRepository;
-
-
+    
     private List<User> users;
 
     @Before
     public void setupMock() {
         userRepository = mock(UserRepository.class);
         //userController = mock(UserController.class);
-        userController = new UserController(userRepository,historyUserRepository);
+        userController = new UserController(userRepository, historyUserRepository);
         users = Arrays.asList(
                 new User("Test1", "Test2"),
                 new User("Test2", "Test2"),
-                new User("Test3", "Test2"),
-                new User("Test4", "Test2"),
-                new User("Test5", "Test2")
+                new User("Test3", "Test2")
         );
+
         users.get(0).setId(0);
-        Publication publ = new Publication();
-        publ.setUser(users.get(0));
-        publ.setAuthorName("Test1");
-        publ.setText("asd");
-        publ.setName("testPubn");
-        publ.setRaiting(5);
-        Publication publ2 = new Publication();
-        publ2.setUser(users.get(0));
-        publ2.setAuthorName("Test1");
-        publ2.setText("asasdd");
-        publ2.setName("testasdPubn");
-        publ2.setRaiting(2);
-        users.get(0).setListPubl(Arrays.asList(publ,publ2));
-        Comment comment = new Comment();
-        comment.setUser(users.get(0));
-        comment.setRaiting(3);
-        comment.setText("asd");
-        users.get(0).setListCom(Arrays.asList(comment));
-       // MockitoAnnotations.initMocks(this);
+        users.get(0).setListPubl(Arrays.asList(
+                new Publication("TEXT", "ABUBU", 5, users.get(0), users.get(0).getNickName()),
+                new Publication("TEXT2", "ABUBU2", 2, users.get(0), users.get(0).getNickName())
+        ));
+
+        users.get(0).setListCom(Arrays.asList(
+                new Comment(0, "TEST", 3, users.get(0).getListPubl().get(0), users.get(0))
+        ));
+        // MockitoAnnotations.initMocks(this);
     }
+
 
     @Test
     public void whenCall() {

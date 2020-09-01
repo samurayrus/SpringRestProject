@@ -50,6 +50,15 @@ public class Comment {
         raiting = 0;
     }
 
+    public Comment(int id, String text, int raiting, Publication publication, User user) {
+        this();
+        this.id = id;
+        this.text = text;
+        this.raiting = raiting;
+        this.publication = publication;
+        this.user = user;
+    }
+
     @JsonIgnore
     public Comment getComment() {
         return comment;
