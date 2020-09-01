@@ -25,6 +25,10 @@ public class PublicationController {
     @Autowired
     private UserRepository userRepository;
 
+    public PublicationController(PublicationRepository publicationRepository, UserRepository userRepository) {
+        this.publicationRepository = publicationRepository;
+        this.userRepository = userRepository;
+    }
 
     @GetMapping("/")
     public Iterable<Publication> getAllPublication() {
@@ -73,11 +77,11 @@ public class PublicationController {
     }
 
     @PostMapping("/{id}/addraiting")
-    public String addPublicationRaiting(@PathVariable int id) {
+    public Integer addPublicationRaiting(@PathVariable int id) {
         Publication publ = publicationRepository.findById(id);
         publ.setRaiting(publ.getRaiting() + 1);
         publicationRepository.flush();
-        return "{New raiting =" + publ.getRaiting() + " }";
+        return publ.getRaiting();
     }
 
     @PutMapping("/{id}")
