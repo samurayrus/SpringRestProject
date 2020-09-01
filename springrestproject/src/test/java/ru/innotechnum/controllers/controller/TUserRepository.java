@@ -56,8 +56,8 @@ public class TUserRepository {
        // when(historyUserRepository).thenReturn(null);
        // when(historyUserRepository.save).thenReturn();
 
-        System.out.println(userController.getUserInfo(0));
         System.out.println(userRepository.findById(0).toString());
+        System.out.println(userController.getUserInfo(0));
         //System.out.println(userController.getRaiting(0));
 
        // userController.addUser(users.get(0));
