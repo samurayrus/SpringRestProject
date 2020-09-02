@@ -9,13 +9,13 @@
  - ![Image alt](springrestproject/screens/history_1.png)
  - Таблица пользователей
  - ![Image alt](springrestproject/screens/Table3.png)
- - Добавление нового пользователя
+ - Публикации старые -> новые
  - ![Image alt](springrestproject/screens/addUser2.png)
- - Получение всех комментариев
+ - Получение комментария по id
  - ![Image alt](springrestproject/screens/getAllComments2.png)
- - Получение всех статей
+ - добавление рейтинга
  - ![Image alt](springrestproject/screens/getAllPublication2.png)
- - Получение всех комментариев конкретного пользователя
+ - Получение всех пользователей
  - ![Image alt](springrestproject/screens/getuserComments2.png)
  - Получение информации о пользователе по id
  - ![Image alt](springrestproject/screens/getuserID2.png)
