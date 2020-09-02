@@ -116,8 +116,8 @@ public class Publication {
         return raiting;
     }
 
-    @JsonIgnore
     public int getAuthorId() {
+        if(user!=null) return user.getId();
         return authorId;
     }
 
