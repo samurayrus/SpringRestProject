@@ -10,12 +10,12 @@
  - Таблица пользователей
  - ![Image alt](springrestproject/screens/Table3.png)
  - Добавление нового пользователя
- - ![Image alt](springrestproject/screens/addUser.png)
+ - ![Image alt](springrestproject/screens/addUser2.png)
  - Получение всех комментариев
- - ![Image alt](springrestproject/screens/getAllComments.png)
+ - ![Image alt](springrestproject/screens/getAllComments2.png)
  - Получение всех статей
- - ![Image alt](springrestproject/screens/getAllPublication.png)
+ - ![Image alt](springrestproject/screens/getAllPublication2.png)
  - Получение всех комментариев конкретного пользователя
- - ![Image alt](springrestproject/screens/getuserComments.png)
+ - ![Image alt](springrestproject/screens/getuserComments2.png)
  - Получение информации о пользователе по id
- - ![Image alt](springrestproject/screens/getuserID.png)
+ - ![Image alt](springrestproject/screens/getuserID2.png)
