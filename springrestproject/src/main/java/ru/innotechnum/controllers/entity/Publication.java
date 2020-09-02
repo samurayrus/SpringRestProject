@@ -116,6 +116,7 @@ public class Publication {
         return raiting;
     }
 
+    @JsonIgnore
     public int getAuthorId() {
         return authorId;
     }
@@ -135,7 +136,7 @@ public class Publication {
                 ", name='" + name + '\'' +
                 ", text='" + text + '\'' +
                 ", raiting=" + raiting +
-                ", authorId=" + authorId +
+                ", authorId=" + user.getId() +
                 ", authorName='" + authorName + '\'' +
                 ", dateCreate=" + dateCreate +
                 '}';
