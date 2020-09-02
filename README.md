@@ -17,5 +17,5 @@
  - ![Image alt](springrestproject/screens/getAllPublication2.png)
  - Получение всех пользователей
  - ![Image alt](springrestproject/screens/getuserComments2.png)
- - Получение информации о пользователе по id
- - ![Image alt](springrestproject/screens/getuserID2.png)
+ - Ошибка. Не отображаются id
+ - ![Image alt](springrestproject/screens/error.png)
