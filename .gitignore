@@ -33,3 +33,14 @@ springrestproject/target/classes/ru/innotechnum/controllers/entity/Comment.class
 springrestproject/target/classes/ru/innotechnum/controllers/controller/ControllerComments.class
 springrestproject/target/classes/ru/innotechnum/controllers/controller/ControllerComments.class
 springrestproject/target/classes/ru/innotechnum/controllers/entity/Comment.class
+springrestproject/target/test-classes/ru/innotechnum/controllers/controller/UserRepositoryTest.class
+springrestproject/target/test-classes/ru/innotechnum/controllers/controller/PublicationControllerTest.class
+springrestproject/target/classes/ru/innotechnum/controllers/entity/HistoryUser.class
+springrestproject/target/classes/ru/innotechnum/controllers/database/UserRepository.class
+springrestproject/target/classes/ru/innotechnum/controllers/database/PublicationRepository.class
+springrestproject/target/classes/ru/innotechnum/controllers/database/HistoryUserRepository.class
+springrestproject/target/classes/ru/innotechnum/controllers/database/CommentRepository.class
+springrestproject/target/classes/ru/innotechnum/controllers/controller/UserController.class
+springrestproject/target/classes/ru/innotechnum/controllers/controller/TestController.class
+springrestproject/target/classes/ru/innotechnum/controllers/controller/PublicationController.class
+springrestproject/target/classes/ru/innotechnum/controllers/controller/CommentsController.class

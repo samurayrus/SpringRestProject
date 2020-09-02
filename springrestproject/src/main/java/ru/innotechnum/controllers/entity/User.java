@@ -91,7 +91,7 @@ public class User {
     }
 
     public int getId() {
-        return id = 0;
+        return id;
     }
 
     public String getAboutMe() {

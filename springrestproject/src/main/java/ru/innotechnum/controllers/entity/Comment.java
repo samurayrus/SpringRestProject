@@ -88,6 +88,7 @@ public class Comment {
     }
 
     public int getPublicationId() {
+        if(publication!=null) return publication.getId();
         return publicationId;
     }
 
@@ -117,6 +118,7 @@ public class Comment {
     }
 
     public int getAuthorId() {
+        if(user!=null) return user.getId();
         return authorId;
     }
 
@@ -129,6 +131,7 @@ public class Comment {
     }
 
     public int getParentId() {
+        if(comment!=null) return comment.getId();
         return parentId;
     }
 
