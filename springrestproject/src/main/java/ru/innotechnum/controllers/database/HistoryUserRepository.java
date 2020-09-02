@@ -20,6 +20,6 @@ public interface HistoryUserRepository extends CrudRepository<HistoryUser, Integ
     void flush();
 
     @Query("from HistoryUser h where h.user = :author AND h.dateBegin >= :date AND h.dateEnd <= :date")
-     HistoryUser findByUser(@Param("date") LocalDate date, @Param("author") User user);
+    HistoryUser findByUser(@Param("date") LocalDate date, @Param("author") User user);
 
 }
