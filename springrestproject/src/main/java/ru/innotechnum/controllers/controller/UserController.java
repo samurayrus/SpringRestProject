@@ -50,6 +50,11 @@ public class UserController {
         return userRepository.findById(id);
     }
 
+    @GetMapping("/")
+    public Iterable<User> getAllUsers() {
+        return userRepository.findAll();
+    }
+
 
     @PostMapping("/")
     @ResponseStatus(HttpStatus.CREATED)
