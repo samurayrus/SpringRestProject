@@ -4,6 +4,7 @@ import com.fasterxml.jackson.annotation.JsonIgnore;
 
 import javax.persistence.*;
 import java.time.LocalDate;
+import java.time.LocalDateTime;
 import java.util.List;
 
 @Entity
@@ -15,7 +16,7 @@ public class User {
     private int id;
     private String nickName;
     private String aboutMe;
-    private LocalDate dateReg;
+    private LocalDateTime dateReg;
     private Boolean deleted;
 
     @OneToMany(targetEntity = Comment.class, mappedBy = "user", cascade = CascadeType.ALL, orphanRemoval = true)
@@ -28,7 +29,7 @@ public class User {
     private List<HistoryUser> historyUsers;
 
     public User() {
-        dateReg = LocalDate.now();
+        dateReg = LocalDateTime.now();
         deleted = false;
     }
 
@@ -85,7 +86,7 @@ public class User {
         this.aboutMe = aboutMe;
     }
 
-    public void setDateReg(LocalDate dateReg) {
+    public void setDateReg(LocalDateTime dateReg) {
         this.dateReg = dateReg;
     }
 
@@ -101,7 +102,7 @@ public class User {
         return nickName;
     }
 
-    public LocalDate getDateReg() {
+    public LocalDateTime getDateReg() {
         return dateReg;
     }
 

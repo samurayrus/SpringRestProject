@@ -4,6 +4,7 @@ import com.fasterxml.jackson.annotation.JsonIgnore;
 
 import javax.persistence.*;
 import java.time.LocalDate;
+import java.time.LocalDateTime;
 import java.util.List;
 
 @Entity
@@ -25,7 +26,7 @@ public class Comment {
     private Publication publication;
 
     @Column(name = "datecreate")
-    private LocalDate dateCreate;
+    private LocalDateTime dateCreate;
 
     @ManyToOne  //(cascade = CascadeType.ALL)
     @JoinColumn(name = "parentid")
@@ -46,7 +47,7 @@ public class Comment {
     private int parentId;
 
     public Comment() {
-        dateCreate = LocalDate.now();
+        dateCreate = LocalDateTime.now();
         raiting = 0;
     }
 
@@ -123,7 +124,7 @@ public class Comment {
         return authName;
     }
 
-    public LocalDate getDateCreate() {
+    public LocalDateTime getDateCreate() {
         return dateCreate;
     }
 
@@ -152,7 +153,7 @@ public class Comment {
     }
 
 
-    public void setDateCreate(LocalDate dateCreate) {
+    public void setDateCreate(LocalDateTime dateCreate) {
         this.dateCreate = dateCreate;
     }
 

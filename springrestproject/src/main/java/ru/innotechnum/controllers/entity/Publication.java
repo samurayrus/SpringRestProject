@@ -4,6 +4,7 @@ import com.fasterxml.jackson.annotation.JsonIgnore;
 
 import javax.persistence.*;
 import java.time.LocalDate;
+import java.time.LocalDateTime;
 import java.util.List;
 
 @Entity
@@ -15,13 +16,14 @@ public class Publication {
     private String name;
     private String text;
     private int raiting;
+    private boolean deleted;
 
     @ManyToOne//(cascade = CascadeType.ALL)
     @JoinColumn(name = "author_id")
     private User user;
 
     private String authorName;
-    private LocalDate dateCreate;
+    private LocalDateTime dateCreate;
 
     @OneToMany(targetEntity = Comment.class, mappedBy = "publication", cascade = CascadeType.ALL, orphanRemoval = true)
     private List<Comment> commentList;
@@ -31,7 +33,8 @@ public class Publication {
 
     public Publication() {
         raiting = 0;
-        dateCreate = LocalDate.now();
+        dateCreate = LocalDateTime.now();
+        deleted=false;
     }
 
     public Publication(String name, String text, int raiting, User user, String authorName) {
@@ -41,6 +44,14 @@ public class Publication {
         this.raiting = raiting;
         this.user = user;
         this.authorName = authorName;
+    }
+
+    public boolean isDeleted() {
+        return deleted;
+    }
+
+    public void setDeleted(boolean deleted) {
+        this.deleted = deleted;
     }
 
     @JsonIgnore
@@ -77,7 +88,7 @@ public class Publication {
         this.authorName = authorName;
     }
 
-    public void setDateCreate(LocalDate dateCreate) {
+    public void setDateCreate(LocalDateTime dateCreate) {
         this.dateCreate = dateCreate;
     }
 
@@ -113,7 +124,7 @@ public class Publication {
         return authorName;
     }
 
-    public LocalDate getDateCreate() {
+    public LocalDateTime getDateCreate() {
         return dateCreate;
     }
 

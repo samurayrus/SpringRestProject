@@ -67,7 +67,7 @@ public class TestController {
     }
 
     private String getTest(@PathVariable int id) { //Возврат никнейма по дате изменения
-        LocalDate ld = LocalDate.now();
+        LocalDateTime ld = LocalDateTime.now();
         List<HistoryUser> list = userRepository.findById(id).getHistoryUsers();
         for (HistoryUser historyUser : list) {
             if (historyUser.getDateBegin().compareTo(ld) < 0 && historyUser.getDateEnd().compareTo(ld) > 0) {

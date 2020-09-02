@@ -14,6 +14,7 @@ import org.springframework.web.bind.annotation.*;
 
 import java.sql.Date;
 import java.time.LocalDate;
+import java.time.LocalDateTime;
 import java.util.List;
 
 @RestController
@@ -63,8 +64,8 @@ public class UserController {
         HistoryUser historyUser = new HistoryUser();
         historyUser.setNickName(user.getNickName());
         historyUser.setAboutMe(user.getAboutMe());
-        historyUser.setDateBegin(LocalDate.now());
-        historyUser.setDateEnd(LocalDate.of(2999, 1, 1));
+        historyUser.setDateBegin(LocalDateTime.now());
+        historyUser.setDateEnd(LocalDateTime.of(3000,1,1,0,0,0));
         historyUser.setUser(user);
         historyUserRepository.save(historyUser);
 
@@ -88,7 +89,7 @@ public class UserController {
 
             List<HistoryUser> hisUs = oldUser.getHistoryUsers();
             if (hisUs!=null) { //Временная заглушка для тестов
-                hisUs.get(hisUs.size() - 1).setDateEnd(LocalDate.now());
+                hisUs.get(hisUs.size() - 1).setDateEnd(LocalDateTime.now());
             }
 
             addHistoryUser(oldUser);

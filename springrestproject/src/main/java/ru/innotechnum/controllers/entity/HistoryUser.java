@@ -5,6 +5,7 @@ import com.fasterxml.jackson.annotation.JsonIgnore;
 
 import javax.persistence.*;
 import java.time.LocalDate;
+import java.time.LocalDateTime;
 import java.util.List;
 
 @Entity
@@ -21,8 +22,8 @@ public class HistoryUser {
 
     private String nickName;
     private String aboutMe;
-    private LocalDate dateBegin;
-    private LocalDate dateEnd;
+    private LocalDateTime dateBegin;
+    private LocalDateTime dateEnd;
 
 
     public int getId() {
@@ -49,19 +50,19 @@ public class HistoryUser {
         this.aboutMe = aboutMe;
     }
 
-    public LocalDate getDateBegin() {
+    public LocalDateTime getDateBegin() {
         return dateBegin;
     }
 
-    public void setDateBegin(LocalDate dateBegin) {
+    public void setDateBegin(LocalDateTime dateBegin) {
         this.dateBegin = dateBegin;
     }
 
-    public LocalDate getDateEnd() {
+    public LocalDateTime getDateEnd() {
         return dateEnd;
     }
 
-    public void setDateEnd(LocalDate dateEnd) {
+    public void setDateEnd(LocalDateTime dateEnd) {
         this.dateEnd = dateEnd;
     }
 
